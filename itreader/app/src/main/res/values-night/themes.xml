@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Itreader" parent="Theme.AppCompat.DayNight.NoActionBar">
+    </style>
+
+    <style name="SplashScreen" parent="Theme.Itreader">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+</resources>

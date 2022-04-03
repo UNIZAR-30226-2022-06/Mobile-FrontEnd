@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Library"
+        android:icon="@drawable/library"
+        android:title="Library"/>
+
+    <item
+        android:id="@+id/MyBooks"
+        android:icon="@drawable/mybooks"
+        android:title="MyBooks"/>
+
+    <item
+        android:id="@+id/Search"
+        android:icon="@drawable/search"
+        android:title="Search"/>
+
+    <item
+        android:id="@+id/Catalog"
+        android:icon="@drawable/catalog"
+        android:title="Catalog"/>
+
+    <item
+        android:id="@+id/Profile"
+        android:icon="@drawable/profile"
+        android:title="Profile"/>
+
+</menu>

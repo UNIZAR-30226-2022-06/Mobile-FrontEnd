@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">itreader</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="signin">Iniciar sesión</string>
+    <string name="signup">Registro</string>
+    <string name="name">Nombre</string>
+    <string name="forgotpass"><u>¿Has olvidado tu contraseña?</u></string>
+    <string name="reset">Restablecer</string>
+</resources>
