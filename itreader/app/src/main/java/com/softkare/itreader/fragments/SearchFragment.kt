@@ -17,5 +17,5 @@ class SearchFragment : Fragment() {
     }
 
 
-    
+
 }
