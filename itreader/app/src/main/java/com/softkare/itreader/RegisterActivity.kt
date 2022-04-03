@@ -66,18 +66,14 @@ class RegisterActivity : AppCompatActivity() {
             .baseUrl(MyApiEndpointInterface.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        var u : Usuario? = null
+        //var u : Usuario?
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         val user2 = Usuario(name,username,password,email)
         service.createUser(user2).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 println("USUARIO REGISTRADO")
-                if(response.body() == null){
-                    u = response.body()
-                    onBackPressed()
-                }else{
-                    showAlert()
-                }
+                //u = response.body()!!
+                onBackPressed()
             }
 
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
