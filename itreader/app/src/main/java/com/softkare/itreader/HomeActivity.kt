@@ -31,9 +31,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.Search -> replaceFragment(searchFragment)//,UsernameFL)
             }
             true
-            
-            
-            
         }
     }
 
