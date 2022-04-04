@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 t.cancel()
                 registro(name.text.toString(),username.text.toString(),password.text.toString(),email.text.toString())
-                Toast.makeText(this, concatenaStrings(username.text.toString()) , Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, concatenaStrings(username.text.toString()) , Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,12 +72,18 @@ class RegisterActivity : AppCompatActivity() {
         service.createUser(user2).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 println("USUARIO REGISTRADO")
-                u = response.body()!!
-                onBackPressed()
+                if(response.body() != null){
+                    onBackPressed()
+                    println("AQUI ESTOY : USUARIO REPETIDO")
+                }else{
+                    showAlert()
+                }
+
             }
 
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 println("FALLO REGISTRO")
+                println("AQUI ESTOY : USUARIO REPETIDO2 EN FALLO")
             }
         })
     }
@@ -87,7 +93,7 @@ class RegisterActivity : AppCompatActivity() {
         val builder = StringBuilder()
         builder.append(username)
             .append(" ")
-            .append("ha sido creado")
+            .append("has been registered")
         return builder.toString()
     }
 
@@ -98,8 +104,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Login Error")
-        builder.setMessage("Invalid password")
+        builder.setTitle("Sign Up Error")
+        builder.setMessage("This user or email is already registered")
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
