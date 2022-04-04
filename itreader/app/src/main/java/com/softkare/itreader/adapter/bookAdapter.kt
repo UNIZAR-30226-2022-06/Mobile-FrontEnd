@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
-import com.softkare.itreader.fragments.Book
+import com.softkare.itreader.backend.Documento
 
-class bookAdapter(private val bookList:List<Book>) : RecyclerView.Adapter<bookViewHolder>(){
-
-
+class bookAdapter(private val bookList: List<Documento>) : RecyclerView.Adapter<bookViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): bookViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

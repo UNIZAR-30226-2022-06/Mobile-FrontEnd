@@ -23,6 +23,7 @@ class ResetActivity : AppCompatActivity()  {
         var t = Toast.makeText(this, "Empty username or password", Toast.LENGTH_SHORT)
 
 
+
     }
 
     private fun goLogin(){

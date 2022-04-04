@@ -56,8 +56,8 @@ public interface MyApiEndpointInterface {
     @PUT("updateDocumento/{idDocDestino}/")
     Call<Documento> updateDocumento(@Path("idDoc") Integer idDocDestino, @Body RequestBody body);
 
-    @GET("Documentos")
-    Call<List<Documento>> documentoList(@Query("idDoc") String idDoc);
+    @GET("Documentos/")
+    Call<List<Documento>> documentoList();
 
 
 }

@@ -1,6 +1,5 @@
 package com.softkare.itreader
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -72,7 +71,10 @@ class RegisterActivity : AppCompatActivity() {
         service.createUser(user2).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if(response.body() != null){
+                    u = response.body()
+                    showToast(u!!.nomUsuario)
                     onBackPressed()
+
                 }else{
                     showAlert()
                 }
@@ -86,6 +88,9 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
+    private fun showToast(username: String) {
+        Toast.makeText(this, concatenaStrings(username) , Toast.LENGTH_SHORT).show()
+    }
 
     private fun concatenaStrings(username: String):String {
         val builder = StringBuilder()
