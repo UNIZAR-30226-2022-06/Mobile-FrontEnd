@@ -71,10 +71,8 @@ class RegisterActivity : AppCompatActivity() {
         val user2 = Usuario(name,username,password,email,false)
         service.createUser(user2).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                println("USUARIO REGISTRADO")
                 if(response.body() != null){
                     onBackPressed()
-                    println("AQUI ESTOY : USUARIO REPETIDO")
                 }else{
                     showAlert()
                 }
