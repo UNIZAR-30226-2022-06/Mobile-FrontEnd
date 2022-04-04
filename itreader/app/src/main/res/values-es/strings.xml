@@ -8,4 +8,23 @@
     <string name="name">Nombre</string>
     <string name="forgotpass"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="reset">Restablecer</string>
+    <string name="menu_library">Biblioteca</string>
+    <string name="menu_MyBooks">MisLibros</string>
+    <string name="menu_search">Buscar</string>
+    <string name="menu_catalog">Catálogo</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="profile_label">Perfil de usuario</string>
+    <string name="profile_name">Nombre:</string>
+    <string name="profile_username">Nombre de usuario:</string>
+    <string name="profile_email">Correo electrónico:</string>
+    <string name="profile_password">Contraseña:</string>
+    <string name="profile_password_hint_old">Introduce tu contraseña</string>
+    <string name="profile_password_hint_new">Introduce tu nueva contraseña</string>
+    <string name="profile_save">Guardar cambios</string>
+    <string name="profile_signout">Cerrar sesión</string>
+    <string name="profile_delete">Eliminar tu cuenta</string>
+
+    <!-- TODO: Borrar o cambiar este texto de marcador de posición -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -3,26 +3,26 @@
     <item
         android:id="@+id/Library"
         android:icon="@drawable/library"
-        android:title="Library"/>
+        android:title="@string/menu_library"/>
 
     <item
         android:id="@+id/MyBooks"
         android:icon="@drawable/mybooks"
-        android:title="MyBooks"/>
+        android:title="@string/menu_MyBooks"/>
 
     <item
         android:id="@+id/Search"
         android:icon="@drawable/search"
-        android:title="Search"/>
+        android:title="@string/menu_search"/>
 
     <item
         android:id="@+id/Catalog"
         android:icon="@drawable/catalog"
-        android:title="Catalog"/>
+        android:title="@string/menu_catalog"/>
 
     <item
         android:id="@+id/Profile"
         android:icon="@drawable/profile"
-        android:title="Profile"/>
+        android:title="@string/menu_profile"/>
 
 </menu>

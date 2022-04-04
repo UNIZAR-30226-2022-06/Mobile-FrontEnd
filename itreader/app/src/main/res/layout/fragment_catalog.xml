@@ -28,7 +28,7 @@
         android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Catalog"
+        android:text="@string/menu_catalog"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
