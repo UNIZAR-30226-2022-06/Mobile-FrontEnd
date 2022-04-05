@@ -107,6 +107,7 @@
                     android:drawablePadding="6dp"
                     android:hint="@string/name"
                     android:inputType="textPersonName"
+                    android:maxLength="40"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,6 +125,7 @@
                     android:drawablePadding="6dp"
                     android:hint="Email"
                     android:inputType="textPersonName"
+                    android:maxLength="30"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -141,6 +143,7 @@
                     android:drawablePadding="6dp"
                     android:hint="@string/username"
                     android:inputType="textPersonName"
+                    android:maxLength="15"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -160,6 +163,7 @@
                     android:drawablePadding="6dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:maxLength="20"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
             </com.google.android.material.textfield.TextInputLayout>
