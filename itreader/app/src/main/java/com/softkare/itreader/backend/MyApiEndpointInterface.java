@@ -69,7 +69,10 @@ public interface MyApiEndpointInterface {
     @GET("Libros/")
     Call<List<Libro>> libroList();
 
-    @GET("Usuarios/{correo}")
+    @GET("UsuariosCorreo/{correo}")
     Call<Usuario> checkUser(@Path("correo")String correo);
+
+    @GET("enviarCorreo/{correo}")
+    Call<Usuario> enviarCorreo(@Path("correo")String correo, @Query("correo")String correo2);
 
 }

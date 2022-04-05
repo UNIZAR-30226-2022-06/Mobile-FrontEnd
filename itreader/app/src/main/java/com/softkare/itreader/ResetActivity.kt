@@ -48,21 +48,30 @@ class ResetActivity : AppCompatActivity()  {
             .baseUrl(MyApiEndpointInterface.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        var u : Usuario?
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         service.checkUser(email).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if(response.body() != null){
-                    u = response.body()
-                    showToast(u!!.correo)
+                    service.enviarCorreo(email,email).enqueue(object : Callback<Usuario>{
+                        override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                            if(response.body() != null){
+                                println(email)
+                                println("CORREO ENVIADO")
+                            }else{
+                                println(email)
+                                println("CORREO NO ENVIADO 4")
+                            }
+                        }
+                        override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                            println("POSIBLE FALLO")
+                        }
+                    })
+                    showToast(email)
                     goLogin()
-
                 }else{
                     showAlert()
                 }
-
             }
-
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 println("FALLO REGISTRO")
                 println("AQUI ESTOY : USUARIO REPETIDO2 EN FALLO")
@@ -76,7 +85,7 @@ class ResetActivity : AppCompatActivity()  {
     }
 
     private fun showToast(email: String) {
-        Toast.makeText(this, concatenaStrings(email) , Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, concatenaStrings(email) , Toast.LENGTH_LONG).show()
     }
 
 
