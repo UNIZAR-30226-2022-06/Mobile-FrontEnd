@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         val password = findViewById<TextInputEditText>(R.id.password_usuario)
         val validar: Button = findViewById(R.id.btnValUsuario)
 
-        var t = Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+        var t = Toast.makeText(this, R.string.general_error, Toast.LENGTH_SHORT)
 
         validar.setOnClickListener {
             if (email.text.toString().isEmpty() || username.text.toString()
@@ -39,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
                     .isEmpty()
             ) {
                 t.cancel()
-                t = Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+                t = Toast.makeText(this, R.string.general_error, Toast.LENGTH_SHORT)
                 t.show()
             } else {
                 t.cancel()
@@ -102,8 +102,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Sign Up Error")
-        builder.setMessage("This user or email is already registered")
+        builder.setTitle(R.string.builder_signup_error)
+        builder.setMessage(R.string.builder_already_registered)
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
