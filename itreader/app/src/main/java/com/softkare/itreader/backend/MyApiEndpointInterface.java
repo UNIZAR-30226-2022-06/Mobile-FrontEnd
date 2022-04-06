@@ -73,6 +73,5 @@ public interface MyApiEndpointInterface {
     Call<Usuario> checkUser(@Path("correo")String correo);
 
     @GET("enviarCorreo/{correo}")
-    Call<Usuario> enviarCorreo(@Path("correo")String correo, @Query("correo")String correo2);
-
+    Call<Usuario> enviarCorreo(@Path("correo")String correo);
 }

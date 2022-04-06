@@ -52,7 +52,9 @@ class ResetActivity : AppCompatActivity()  {
         service.checkUser(email).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 if(response.body() != null){
-                    service.enviarCorreo(email,email).enqueue(object : Callback<Usuario>{
+                    //val delim = "@"
+                    //val list = email.split(delim)
+                    service.enviarCorreo(email).enqueue(object : Callback<Usuario>{
                         override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                             if(response.body() != null){
                                 println(email)
