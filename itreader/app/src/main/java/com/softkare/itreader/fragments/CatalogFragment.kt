@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
 import com.softkare.itreader.adapter.bookAdapter
 import com.softkare.itreader.backend.Documento
+import com.softkare.itreader.backend.Libro
 import com.softkare.itreader.backend.MyApiEndpointInterface
+import com.softkare.itreader.backend.Usuario
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class CatalogFragment : Fragment() {
-    lateinit var list:List<Documento>
+    lateinit var list:List<Libro>
     lateinit var contexto : Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +45,8 @@ class CatalogFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        service.documentoList().enqueue(object : Callback<List<Documento>> {
-            override fun onResponse(call: Call<List<Documento>>, response: Response<List<Documento>>) {
+        service.libroList().enqueue(object : Callback<List<Libro>> {
+            override fun onResponse(call: Call<List<Libro>>, response: Response<List<Libro>>) {
                 if(response.body() != null){
                     list = response.body()!!
                     for(i in list) {
@@ -56,7 +58,7 @@ class CatalogFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Documento>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Libro>>, t: Throwable) {
                 println("FALLO REGISTRO")
                 println("AQUI ESTOY : USUARIO REPETIDO2 EN FALLO")
             }
