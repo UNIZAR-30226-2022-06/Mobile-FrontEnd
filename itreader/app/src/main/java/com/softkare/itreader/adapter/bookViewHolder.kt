@@ -22,6 +22,9 @@ class bookViewHolder(view:View):RecyclerView.ViewHolder(view) {
         autor.text = BookModel.autor
         Glide.with(photo.context).load(BookModel.linkPortada).into(photo)
 
+
+        
+
         var t = Toast.makeText(photo.context, autor.text.toString(), Toast.LENGTH_SHORT)
         var z = Toast.makeText(photo.context, nameBook.text.toString(), Toast.LENGTH_SHORT)
 
