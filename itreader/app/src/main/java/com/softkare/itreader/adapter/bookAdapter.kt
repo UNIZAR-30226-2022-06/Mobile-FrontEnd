@@ -18,6 +18,7 @@ class bookAdapter(private val bookList:List<Book>) : RecyclerView.Adapter<bookVi
     override fun onBindViewHolder(holder: bookViewHolder, position: Int) {
         val item = bookList[position]
         holder.render(item)
+        //TODO: Añadir funcionalidad para saltar a BookPageFragment pasandole el libro seleccionado
     }
 
     override fun getItemCount(): Int {

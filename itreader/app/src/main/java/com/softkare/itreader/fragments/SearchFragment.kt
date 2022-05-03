@@ -29,12 +29,8 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 list.clear()
                 for (b in list) {
-                    // Se busca por el titulo del libro
-                    if (b.name.toLowerCase().contains(p0.toString().toLowerCase())) {
-                        list.add(b)
-                    }
-                    // Tambien busca por el autor del libro
-                    else if (b.author.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    // Se busca por el autor del libro
+                    if (b.author.toLowerCase().contains(p0.toString().toLowerCase())) {
                         list.add(b)
                     }
                     recyclerView.adapter = bookAdapter(list)
@@ -46,11 +42,7 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 list.clear()
                 for (b in list) {
-                    if (b.name.toLowerCase().contains(p0.toString().toLowerCase())) {
-                        list.add(b)
-                    }
-                    // Tambien busca por el autor del libro
-                    else if (b.author.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    if (b.author.toLowerCase().contains(p0.toString().toLowerCase())) {
                         list.add(b)
                     }
                     recyclerView.adapter = bookAdapter(list)
