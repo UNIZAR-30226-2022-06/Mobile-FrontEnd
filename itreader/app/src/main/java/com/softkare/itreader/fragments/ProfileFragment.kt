@@ -267,7 +267,7 @@ class ProfileFragment : Fragment() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         val J = JSONObject()
         J.put("nombre", name)
-        J.put("username", username)
+        J.put("nomUsuario", username)
         J.put("correo", email)
         J.put("password", newPass)
         println("json: " + J.toString())
@@ -309,10 +309,24 @@ class ProfileFragment : Fragment() {
     }
 
     private fun goProfile(){
+
+        // Reload current fragment
+        // Reload current fragment
+        var frg: Fragment? = null
+        frg = activity?.supportFragmentManager?.findFragmentByTag("Your_Fragment_TAG")
+        val ft: FragmentTransaction? = activity?.supportFragmentManager?.beginTransaction()
+        if (frg != null) {
+            ft?.detach(frg)
+        }
+        if (frg != null) {
+            ft?.attach(frg)
+        }
+        ft?.commit()
+
         val profFr = ProfileFragment()
         val transicion = activity?.supportFragmentManager?.beginTransaction()
         transicion?.replace(R.id.fragment_container, profFr)
-        transicion?.addToBackStack(null)
+        //transicion?.addToBackStack(null)
         transicion?.commit()
     }
 
