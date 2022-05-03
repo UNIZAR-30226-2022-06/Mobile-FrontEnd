@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.softkare.itreader.R
 import org.w3c.dom.Text
 
@@ -20,12 +21,13 @@ class BookPageFragment : Fragment() {
     ): View? {
         lateinit var view: View
         val bundle : Bundle? = this.arguments
-        val book = bundle?.getSerializable("book") as Book
+        val book : Book = bundle?.getSerializable("book") as Book
 
         /*
             Si ya está en la biblioteca:
                 ----> view = inflater.inflate(R.layout.fragment_user_page_in_library, container, false)
                 val buttonDelete = view.findViewById<Button>(R.id.buttonDeleteLibrary)
+                val buttonRead = view.findViewById<Button>(R.id.buttonRead)
                 buttonDelete.setOnClickListener() {
                 // Falta servicio para eliminar de la biblioteca
             }
@@ -44,7 +46,12 @@ class BookPageFragment : Fragment() {
         val editorial : TextView = view.findViewById(R.id.editorial)
         val rating : RatingBar = view.findViewById(R.id.rating)
 
-
+        Glide.with(bookImage.context).load(book.photo).into(bookImage)
+        bookTitle.setText(book.name)
+        title.setText(book.name)
+        author.setText(book.author)
+        //editorial.setText(book.editorial)
+        //rating.rating = book.valoracion
 
         return view
     }

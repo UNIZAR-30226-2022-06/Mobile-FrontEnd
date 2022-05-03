@@ -31,6 +31,10 @@
     <string name="profile_save">Guardar cambios</string>
     <string name="profile_signout">Cerrar sesión</string>
     <string name="profile_delete">Eliminar tu cuenta</string>
+    <string name="book_page_rate">Valóralo</string>
+    <string name="book_page_read">Leer</string>
+    <string name="book_page_add">Añadir a tu biblioteca</string>
+    <string name="book_page_delete">Eliminar de tu biblioteca</string>
 
     <!-- TODO: Borrar o cambiar este texto de marcador de posición -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

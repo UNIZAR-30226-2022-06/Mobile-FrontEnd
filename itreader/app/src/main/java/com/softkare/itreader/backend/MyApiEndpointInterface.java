@@ -59,5 +59,9 @@ public interface MyApiEndpointInterface {
     @GET("Documentos")
     Call<List<Documento>> documentoList(@Query("idDoc") String idDoc);
 
+    //TODO: Servicios para libros y documentos
+
+    // Servicio para mostrar los libros de la biblioteca del usuario
+    // Servicio para mostrar los documentos subidos por el usuario
 
 }
