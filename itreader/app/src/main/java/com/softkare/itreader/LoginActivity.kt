@@ -79,6 +79,8 @@ class LoginActivity : AppCompatActivity() {
                     if(u!!.password.toString() == password){
                         prefs.saveEmail(u!!.correo)
                         prefs.saveName(u!!.nombre)
+                        prefs.saveUsername(u!!.nomUsuario)
+                        prefs.savePass(u!!.password)
                         showGeneral()
                         finish()
                     }else{

@@ -18,9 +18,7 @@ class LibraryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_library,container,false)
-        //val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerBooks)
-        //recyclerView.layoutManager= LinearLayoutManager(context)
-        //recyclerView.adapter = bookAdapter(BookProvider.bookList)
+
         return view
     }
 

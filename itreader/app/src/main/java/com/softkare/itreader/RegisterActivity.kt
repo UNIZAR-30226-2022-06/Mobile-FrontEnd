@@ -13,6 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         setup()
     }
 
-    private fun setup(){
+    private fun setup() {
 
         val goLog: Button = findViewById(R.id.btnLogRegister)
         val name = findViewById<TextInputEditText>(R.id.nombre_usuario)
@@ -33,20 +34,19 @@ class RegisterActivity : AppCompatActivity() {
         var t = Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
 
         validar.setOnClickListener {
-            if (email.text.toString().isEmpty() || username.text.toString()
-                    .isEmpty() || password.text.toString().isEmpty() || name.text.toString()
-                    .isEmpty()
-            ) {
+            if(email.text?.isEmpty() == true || username.text?.isEmpty() == true || password.text?.isEmpty() == true || name.text?.isEmpty() == true) {
                 t.cancel()
-                t = Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+                t = Toast.makeText(this, "Invalid Data", Toast.LENGTH_SHORT)
                 t.show()
-            } else {
+            }else if(!checkPass(password.text.toString())) {
+                showAlertPassword()
+            }else if(!checkEmail(email.text.toString())) {
+                showAlertEmail()
+            }else{
                 t.cancel()
-                registro(name.text.toString(),username.text.toString(),password.text.toString(),email.text.toString())
-                //Toast.makeText(this, concatenaStrings(username.text.toString()) , Toast.LENGTH_SHORT).show()
+                comprobarRegistro(name.text.toString(), username.text.toString(), password.text.toString(), email.text.toString()  )
             }
         }
-
 
         goLog.setOnClickListener {
             onBackPressed()
@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun registro(
+    private fun comprobarRegistro(
         name: String,
         username: String,
         password: String,
@@ -74,7 +74,6 @@ class RegisterActivity : AppCompatActivity() {
                     u = response.body()
                     showToast(u!!.nomUsuario)
                     onBackPressed()
-
                 }else{
                     showAlert()
                 }
@@ -109,6 +108,42 @@ class RegisterActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Sign Up Error")
         builder.setMessage("This user or email is already registered")
+        builder.setPositiveButton("Ok",null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun checkPass(password: String): Boolean {
+        val passwordREGEX = Pattern.compile("^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+                "(?=.*[a-z])" +         //at least 1 lower case letter
+                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                ".{8,}" +               //at least 8 characters
+                "$");
+        println(password)
+        var a = passwordREGEX.matcher(password).matches()
+        println(a)
+        return passwordREGEX.matcher(password).matches()
+    }
+
+    private fun checkEmail(email: String): Boolean{
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private fun showAlertPassword(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Password Error")
+        builder.setMessage("Password correct format: 8 characters with at least 1 uppercase and lowercase and 1 number")
+        builder.setPositiveButton("Ok",null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun showAlertEmail(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Email Error")
+        builder.setMessage("This format email is incorrect")
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()

@@ -19,25 +19,21 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val bottomNav:BottomNavigationView = findViewById(R.id.bottom_navigation)
-        //val UsernameFL=intent.getStringExtra("Username_fromLogin").toString()
-        //println(UsernameFL)
         replaceFragment(libraryFragment)//,UsernameFL)
         bottomNav.setOnItemSelectedListener{
             when(it.itemId){
-                R.id.Library -> replaceFragment(libraryFragment)//,UsernameFL)
-                R.id.MyBooks -> replaceFragment(myBooksFragment)//,UsernameFL)
-                R.id.Catalog -> replaceFragment(catalogFragment)//,UsernameFL)
-                R.id.Profile -> replaceFragment(profileFragment)//,UsernameFL)
-                R.id.Search -> replaceFragment(searchFragment)//,UsernameFL)
+                R.id.Library -> replaceFragment(libraryFragment)
+                R.id.MyBooks -> replaceFragment(myBooksFragment)
+                R.id.Catalog -> replaceFragment(catalogFragment)
+                R.id.Profile -> replaceFragment(profileFragment)
+                R.id.Search -> replaceFragment(searchFragment)
             }
             true
             
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){//, username:String){
-        //val bundle = Bundle()//.apply { putString("username",username) }
-        //fragment.arguments = bundle
+    private fun replaceFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
