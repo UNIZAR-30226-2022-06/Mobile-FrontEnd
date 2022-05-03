@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.softkare.itreader.LoginActivity
 import com.softkare.itreader.R
 import com.softkare.itreader.backend.MyApiEndpointInterface
@@ -42,6 +44,7 @@ class ProfileFragment : Fragment() {
         val email = view.findViewById<EditText>(R.id.editTextTextPersonName3)
         val btn: Button = view.findViewById(R.id.save_changes)
         val btnEliminar: Button = view.findViewById(R.id.button4)
+        val btnSalir: Button = view.findViewById(R.id.button3)
 
         name.setText(prefs.getName())
         username.setText(prefs.getUsername())
@@ -60,19 +63,25 @@ class ProfileFragment : Fragment() {
             J.put("nomUsuario", username.text.toString())
             J.put("correo", email.text.toString())
             J.put("password", "tere4")
+            J.put("esAdmin",false)
             println("json: "+J.toString())
             val body : RequestBody = RequestBody.create(MEDIA_TYPE_JSON,J.toString())
-            var u : Usuario? = null
-            service.updateUser("tere4",body).enqueue(object :
+            var u : Usuario
+            service.updateUser(prefs.getUsername(),body).enqueue(object :
                 Callback<Usuario> {
                 override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                     println("USUARIO REGISTRADO")
                     if (response.body() != null) {
                         u = response.body()!!
-                        //actualizar sharedPreferences
-                        println("usuario "+ u?.nombre+" id:"+u?.id)
+                        prefs.saveEmail(u.correo)
+                        prefs.saveUsername(u.nomUsuario)
+                        prefs.saveName(u.nombre)
+                        println("usuario "+ u.nombre +" id:"+ u.id)
+                        Toast.makeText(activity, "Your changes has been saved", Toast.LENGTH_SHORT).show()
+                        activity?.recreate()
+                    }else{
+                        Toast.makeText(activity, "Your changes hasnt been saved", Toast.LENGTH_SHORT).show()//showAlert() //avisar de que ya existe un email o un correo con ese valor id?
                     }
-                    //Toast.makeText(this@SignUp, "error", Toast.LENGTH_SHORT)
                 }
 
                 override fun onFailure(call: Call<Usuario>, t: Throwable) {
@@ -106,6 +115,11 @@ class ProfileFragment : Fragment() {
 
             })
 
+        }
+
+        btnSalir.setOnClickListener {
+            goLogin()
+            activity?.finish()
         }
 
     }

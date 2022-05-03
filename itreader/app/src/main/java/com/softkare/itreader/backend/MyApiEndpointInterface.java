@@ -2,6 +2,10 @@ package com.softkare.itreader.backend;
 
 import java.util.List;
 
+
+import com.softkare.itreader.backend.Usuario;
+import com.softkare.itreader.backend.Documento;
+import com.softkare.itreader.backend.Libro;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,16 +40,16 @@ public interface MyApiEndpointInterface {
                              @Body RequestBody password,
                              @Body RequestBody correo,
                              @Body RequestBody esAdmin*/
-    );
-
-    @DELETE("deleteUsuario/{nomUsuario}/")
-    Call<ResponseBody> deleteUser(@Path("nomUsuario") String nomUsuario);
+                            );
 
     @PUT("addDocsUsuario/{nomUsuario}/")
     Call<Usuario> addDocsUser(@Path("nomUsuario") String nomUsuarioDestino, @Body RequestBody body);
 
-    @GET("Usuarios")
-    Call<List<Usuario>> userList(@Query("nomUsuario") String nomUsuario);
+    @DELETE("deleteUsuario/{nomUsuario}/")
+    Call<ResponseBody> deleteUser(@Path("nomUsuario") String nomUsuario);
+
+    @GET("Usuarios/")
+    Call<List<Usuario>> userList();
 
     @GET("Documentos/{nomUsuario}")
     Call<Documento> getDocumento(@Path("idDoc") String idDoc);
@@ -53,15 +57,21 @@ public interface MyApiEndpointInterface {
     @POST("createDocumento/")
     Call<Documento> createDocumento(@Body Documento doc);
 
+    @POST("createLibro/")
+    Call<Libro> createLibro(@Body Libro libro);
+
     @PUT("updateDocumento/{idDocDestino}/")
     Call<Documento> updateDocumento(@Path("idDoc") Integer idDocDestino, @Body RequestBody body);
 
-    @GET("Documentos")
-    Call<List<Documento>> documentoList(@Query("idDoc") String idDoc);
+    @GET("Documentos/")
+    Call<List<Documento>> documentoList(/*@Query("page") Integer page*/);
 
-    //TODO: Servicios para libros y documentos
+    @GET("Libros/")
+    Call<List<Libro>> libroList();
 
-    // Servicio para mostrar los libros de la biblioteca del usuario
-    // Servicio para mostrar los documentos subidos por el usuario
+    @GET("UsuariosCorreo/{correo}")
+    Call<Usuario> checkUser(@Path("correo")String correo);
 
+    @GET("enviarCorreo/{correo}")
+    Call<Usuario> enviarCorreo(@Path("correo")String correo);
 }
