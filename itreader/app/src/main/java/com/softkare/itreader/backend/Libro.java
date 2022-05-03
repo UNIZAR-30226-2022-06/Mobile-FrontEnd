@@ -3,55 +3,85 @@ package com.softkare.itreader.backend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Libro implements Serializable {
+public class Libro {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("titulo")
+    @SerializedName("nombre")
     @Expose
-    private String titulo;
+    private String nombre;
+    @SerializedName("formato")
+    @Expose
+    private String formato;
+    @SerializedName("linkDocumento")
+    @Expose
+    private String linkDocumento;
+    @SerializedName("linkPortada")
+    @Expose
+    private String linkPortada;
+    @SerializedName("ISBN")
+    @Expose
+    private String ISBN;
     @SerializedName("autor")
     @Expose
     private String autor;
-    @SerializedName("foto")
-    @Expose
-    private String foto;
-    @SerializedName("editorial")
-    @Expose
-    private String editorial;
-    @SerializedName("genero")
-    @Expose
-    private String genero;
-    @SerializedName("valoracion")
-    @Expose
-    private Float valoracion;
 
-    public Libro(String titulo, String autor, String foto, String genero, String editorial, Float valoracion) {
-        this.titulo = titulo;
+    public Libro(String nombre, String linkDocumento, String linkPortada, String ISBN, String autor) {
+        this.nombre = nombre;
+        this.formato = "epub";
+        this.linkDocumento = linkDocumento;
+        this.linkPortada = linkPortada;
+        this.ISBN = ISBN;
         this.autor = autor;
-        this.foto = foto;
-        this.genero = genero;
-        this.editorial = editorial;
-        this.valoracion = valoracion;
     }
 
-    public Integer getPk() {
+    public Integer getId() {
         return id;
     }
 
-    public void setPk(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+
+    public String getLinkDocumento() {
+        return linkDocumento;
+    }
+
+    public void setLinkDocumento(String linkDocumento) {
+        this.linkDocumento = linkDocumento;
+    }
+
+    public String getLinkPortada() {
+        return linkPortada;
+    }
+
+    public void setLinkPortada(String linkPortada) {
+        this.linkPortada = linkPortada;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
 
     public String getAutor() {
@@ -60,37 +90,5 @@ public class Libro implements Serializable {
 
     public void setAutor(String autor) {
         this.autor = autor;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-
-    public Float getValoracion() {
-        return valoracion;
-    }
-
-    public void setValoracion(Float valoracion) {
-        this.valoracion = valoracion;
     }
 }

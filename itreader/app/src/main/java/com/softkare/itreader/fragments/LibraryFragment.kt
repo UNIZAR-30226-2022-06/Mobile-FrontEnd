@@ -17,7 +17,6 @@ class LibraryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //TODO: MOSTRAR SOLO LOS LIBROS QUE EL USUARIO TIENE EN SU BIBLIOTECA
         val view = inflater.inflate(R.layout.fragment_library,container,false)
         //val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerBooks)
         //recyclerView.layoutManager= LinearLayoutManager(context)

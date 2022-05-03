@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val username = findViewById<TextInputEditText>(R.id.username_login)
         val password = findViewById<TextInputEditText>(R.id.password_login)
 
-        var t = Toast.makeText(this, R.string.toast_empty, Toast.LENGTH_SHORT)
+        var t = Toast.makeText(this, "Empty username or password", Toast.LENGTH_SHORT)
 
         goReg.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         goHome.setOnClickListener {
             if(username.text.toString().isEmpty() || password.text.toString().isEmpty()){
                 t.cancel()
-                t = Toast.makeText(this, R.string.toast_empty, Toast.LENGTH_SHORT)
+                t = Toast.makeText(this, "Empty username or password", Toast.LENGTH_SHORT)
                 t.show()
             }else{
                 t.cancel()
@@ -100,8 +100,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(R.string.builder_login_error)
-        builder.setMessage(R.string.builder_invalid_password)
+        builder.setTitle("Login Error")
+        builder.setMessage("Invalid password")
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -109,8 +109,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showAlert2(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(R.string.builder_login_error)
-        builder.setMessage(R.string.toast_not_user)
+        builder.setTitle("Login Error")
+        builder.setMessage("This user does not exist")
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -120,5 +120,7 @@ class LoginActivity : AppCompatActivity() {
         val pantallaGeneral = Intent(this, HomeActivity::class.java)
         startActivity(pantallaGeneral)
     }
+
+
 }
 
