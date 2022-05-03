@@ -28,7 +28,7 @@ class ResetActivity : AppCompatActivity()  {
         val email = findViewById<TextInputEditText>(R.id.email_reset)
         val button:Button = findViewById(R.id.button_reset)
 
-        var t = Toast.makeText(this, "Empty email", Toast.LENGTH_SHORT)
+        var t = Toast.makeText(this, R.string.toast_not_user, Toast.LENGTH_SHORT)
 
         button.setOnClickListener{
             if(email.text.toString().isEmpty()){
@@ -93,7 +93,7 @@ class ResetActivity : AppCompatActivity()  {
 
     private fun concatenaStrings(email: String):String {
         val builder = StringBuilder()
-        builder.append("The password has been sent to") /////////////////////IMPORTANTE
+        builder.append(R.string.builder_sent) /////////////////////IMPORTANTE
             .append(" ")
             .append(email)
         return builder.toString()

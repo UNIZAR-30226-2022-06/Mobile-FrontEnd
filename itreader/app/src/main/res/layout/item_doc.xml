@@ -18,17 +18,18 @@
             android:id="@+id/imageViewBook"
             android:layout_width="150dp"
             android:layout_height="200dp"
+            android:src="@drawable/pdf_file"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
 
         <TextView
-            android:id="@+id/titulo"
+            android:id="@+id/nombre_doc"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="titulo"
+            android:text="Nombre"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -38,16 +39,16 @@
             android:ellipsize="end"/>
 
         <TextView
-            android:id="@+id/autor"
+            android:id="@+id/usuario_doc"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="autor"
+            android:text="usuario"
             android:textStyle="italic"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/imageViewBook"
-            app:layout_constraintTop_toBottomOf="@+id/titulo"
+            app:layout_constraintTop_toBottomOf="@+id/nombre_doc"
             android:lines="1"
             android:ellipsize="end"/>
 
