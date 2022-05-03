@@ -20,7 +20,7 @@ public class Usuario {
     @SerializedName("esAdmin")
     private Boolean esAdmin;
     @SerializedName("docsAnyadidos")
-    private List<Documento> docsAnyadidos;
+    private List<Libro> docsAnyadidos;
     @SerializedName("docsSubidos")
     private List<Documento> docsSubidos;
 
@@ -80,11 +80,11 @@ public class Usuario {
         this.esAdmin = esAdmin;
     }
 
-    public List<Documento> getDocsAnyadidos() {
+    public List<Libro> getDocsAnyadidos() {
         return docsAnyadidos;
     }
 
-    public void setDocsAnyadidos(List<Documento> docsAnyadidos) {
+    public void setDocsAnyadidos(List<Libro> docsAnyadidos) {
         this.docsAnyadidos = docsAnyadidos;
     }
 

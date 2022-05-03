@@ -3,7 +3,9 @@ package com.softkare.itreader.backend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Documento {
+import java.io.Serializable;
+
+public class Documento implements Serializable {
     @SerializedName("id")
     private Integer id;
     @SerializedName("nombre")
