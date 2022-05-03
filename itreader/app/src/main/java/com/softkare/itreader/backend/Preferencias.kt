@@ -10,12 +10,14 @@ class Preferencias(val context:Context) {
 
     val SHARED_EMAIL = "email"
 
-    val SHARE_NAME = "name"
+    val SHARED_NAME = "name"
+
+    val SHARED_PASS = "pass"
 
     val storage = context.getSharedPreferences(SHARED_CTX,0)
 
     fun saveName(name_key:String){
-        storage.edit().putString(SHARE_NAME,name_key).apply()
+        storage.edit().putString(SHARED_NAME,name_key).apply()
     }
 
     fun saveUsername(username_key:String){
@@ -26,8 +28,12 @@ class Preferencias(val context:Context) {
         storage.edit().putString(SHARED_EMAIL,email_key).apply()
     }
 
+    fun savePass(pass:String){
+        storage.edit().putString(SHARED_PASS,pass).apply()
+    }
+
     fun getName():String{
-        return storage.getString(SHARE_NAME,"")!!
+        return storage.getString(SHARED_NAME,"")!!
     }
 
     fun getUsername():String{
@@ -36,6 +42,10 @@ class Preferencias(val context:Context) {
 
     fun getEmail():String{
         return storage.getString(SHARED_EMAIL,"")!!
+    }
+
+    fun getPass():String{
+        return storage.getString(SHARED_PASS,"")!!
     }
 
 }

@@ -163,6 +163,7 @@
                     android:drawablePadding="6dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+                    android:digits="0123456789abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
                     android:maxLength="20"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
