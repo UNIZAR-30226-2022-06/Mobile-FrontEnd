@@ -20,11 +20,7 @@ class LibraryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_library,container,false)
 
         return view
+
     }
-
-
-
-
-
 
 }
