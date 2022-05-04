@@ -26,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class BookPageFragment : Fragment() {
     lateinit var user : Usuario
-    lateinit var userBooks : MutableList<Libro>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +41,7 @@ class BookPageFragment : Fragment() {
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
 
+        //  NO NOS SIRVE PORQUE NO TRAE LA LISTA DE AÑADIDOS DEL USUARIO
         service.getUser(prefs.getUsername()).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 user = response.body()!!
@@ -52,10 +52,6 @@ class BookPageFragment : Fragment() {
             }
         })
 
-        userBooks = mutableListOf()
-        for (b in user.docsAnyadidos) {
-            userBooks.add(b)
-        }
         if (user.docsAnyadidos.contains(book)) {
             view = inflater.inflate(R.layout.fragment_book_page_in_library, container, false)
         } else {
@@ -67,10 +63,8 @@ class BookPageFragment : Fragment() {
         val buttonRead = view.findViewById<Button>(R.id.buttonRead)
 
         buttonAdd.setOnClickListener {
-            userBooks.add(book)
-            val nuevaBiblioteca : List<Libro> = userBooks
             val J = JSONObject()
-            J.put("docsAnyadidos", nuevaBiblioteca)
+            J.put("nomLibro", book.nombre)
             val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
             service.addDocsUser(prefs.getUsername(), body).enqueue(object : Callback<Usuario>{
                 override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
