@@ -3,6 +3,7 @@ package com.softkare.itreader.backend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -20,7 +21,7 @@ public class Usuario {
     @SerializedName("esAdmin")
     private Boolean esAdmin;
     @SerializedName("docsAnyadidos")
-    private List<Documento> docsAnyadidos;
+    private List<Libro> docsAnyadidos;
     @SerializedName("docsSubidos")
     private List<Documento> docsSubidos;
 
@@ -30,6 +31,8 @@ public class Usuario {
         this.password = password;
         this.correo = correo;
         this.esAdmin = esAdmin;
+        this.docsAnyadidos = new ArrayList();
+        this.docsSubidos = new ArrayList();
     }
 
     public Integer getId() {
@@ -80,11 +83,11 @@ public class Usuario {
         this.esAdmin = esAdmin;
     }
 
-    public List<Documento> getDocsAnyadidos() {
+    public List<Libro> getDocsAnyadidos() {
         return docsAnyadidos;
     }
 
-    public void setDocsAnyadidos(List<Documento> docsAnyadidos) {
+    public void setDocsAnyadidos(List<Libro> docsAnyadidos) {
         this.docsAnyadidos = docsAnyadidos;
     }
 

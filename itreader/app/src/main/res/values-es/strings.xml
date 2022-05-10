@@ -5,6 +5,13 @@
     <string name="password">Contraseña</string>
     <string name="signin">Iniciar sesión</string>
     <string name="signup">Registro</string>
+    <string name="login_error">Error en el inicio de sesión</string>
+    <string name="error_user">Este usuario no existe</string>
+    <string name="error_password">Contraseña incorrecta</string>
+    <string name="signup_error">Error en el registro</string>
+    <string name="error_message">Ha ocurrido un error</string>
+    <string name="empty_field">Usuario o contraseña vacío</string>
+    <string name="user_mail_already_registered">Este usuario o correo ya está registrado</string>
     <string name="name">Nombre</string>
     <string name="forgotpass"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="reset">Restablecer</string>
@@ -23,6 +30,14 @@
     <string name="profile_save">Guardar cambios</string>
     <string name="profile_signout">Cerrar sesión</string>
     <string name="profile_delete">Eliminar tu cuenta</string>
+    <string name="no_books">No tienes libros para mostrar</string>
+    <string name="no_docs">No tienes documentos para mostrar</string>
+    <string name="book_page_rate">Valóralo</string>
+    <string name="book_page_read">Leer</string>
+    <string name="book_page_add">Añadir a tu biblioteca</string>
+    <string name="book_page_delete">Eliminar de tu biblioteca</string>
+    <string name="alert_add_to_library">No se pudo añadir el libro a la bilioteca</string>
+    <string name="alert_delete_to_library">No se pudo borrar el libro de la bilioteca</string>
 
     <!-- TODO: Borrar o cambiar este texto de marcador de posición -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
