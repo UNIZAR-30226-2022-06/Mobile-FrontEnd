@@ -140,6 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:digits="0123456789abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+        android:maxLength="20"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
