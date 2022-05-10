@@ -35,6 +35,8 @@
     <string name="book_page_read">Read it</string>
     <string name="book_page_add">Add to your library</string>
     <string name="book_page_delete">Delete from your library</string>
+    <string name="alert_add_to_library">Could not add book from library</string>
+    <string name="alert_delete_to_library">Could not delete book from library</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

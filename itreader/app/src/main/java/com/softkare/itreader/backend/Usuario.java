@@ -3,6 +3,7 @@ package com.softkare.itreader.backend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -30,6 +31,8 @@ public class Usuario {
         this.password = password;
         this.correo = correo;
         this.esAdmin = esAdmin;
+        this.docsAnyadidos = new ArrayList();
+        this.docsSubidos = new ArrayList();
     }
 
     public Integer getId() {

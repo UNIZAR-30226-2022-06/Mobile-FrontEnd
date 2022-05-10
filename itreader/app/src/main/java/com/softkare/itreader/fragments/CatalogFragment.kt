@@ -69,7 +69,7 @@ class CatalogFragment : Fragment() {
     private fun showAlert(){
         val builder = AlertDialog.Builder(contexto)
         builder.setTitle("Error")
-        builder.setMessage("You don't have any books to show")
+        builder.setMessage(getString(R.string.no_books))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
