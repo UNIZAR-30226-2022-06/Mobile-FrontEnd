@@ -49,10 +49,4 @@ class LibraryFragment : Fragment() {
             }
         })
     }
-
-
-
-
-
-
 }
