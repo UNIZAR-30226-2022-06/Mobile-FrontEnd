@@ -20,6 +20,9 @@
     <string name="menu_search">Buscar</string>
     <string name="menu_catalog">Catálogo</string>
     <string name="menu_profile">Perfil</string>
+    <string name="menu_admin_control_panel">Panel de Control del Administrador</string>
+    <string name="menu_edit">Modificar</string>
+    <string name="menu_delete">Eliminar</string>
     <string name="profile_label">Perfil de usuario</string>
     <string name="profile_name">Nombre:</string>
     <string name="profile_username">Nombre de usuario:</string>
@@ -38,8 +41,6 @@
     <string name="book_page_delete">Eliminar de tu biblioteca</string>
     <string name="alert_add_to_library">No se pudo añadir el libro a la bilioteca</string>
     <string name="alert_delete_to_library">No se pudo borrar el libro de la bilioteca</string>
-
-    <!-- TODO: Borrar o cambiar este texto de marcador de posición -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="book_added">Añadido a la biblioteca</string>
+    <string name="book_deleted">Eliminado de la biblioteca</string>
 </resources>

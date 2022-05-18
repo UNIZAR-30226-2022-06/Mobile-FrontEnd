@@ -34,7 +34,6 @@ class BookPageFragment : Fragment() {
         lateinit var view: View
         val bundle : Bundle? = this.arguments
         val book : Libro = bundle?.getSerializable("book") as Libro
-        user = Usuario("","","","", false)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -52,14 +51,16 @@ class BookPageFragment : Fragment() {
             }
         })
 
-        if (!user.docsAnyadidos.isEmpty() && user.docsAnyadidos.contains(book)) {
+        val check = user.docsAnyadidos.find { it.id == book.id }
+
+        if (check != null) {
             view = inflater.inflate(R.layout.fragment_book_page_in_library, container, false)
             val buttonDelete = view.findViewById<Button>(R.id.buttonDeleteLibrary)
             val buttonRead = view.findViewById<Button>(R.id.buttonRead)
             buttonDelete.setOnClickListener {
                 service.deleteDocUser(prefs.getUsername(), book.nombre).enqueue(object : Callback<Usuario>{
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                        val t = Toast.makeText(activity, "Book removed from library", Toast.LENGTH_SHORT)
+                        val t = Toast.makeText(activity, getString(R.string.book_deleted), Toast.LENGTH_SHORT)
                         t.show()
                         val activity = view.context as AppCompatActivity
                         val transit = LibraryFragment()
@@ -88,7 +89,7 @@ class BookPageFragment : Fragment() {
                 val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
                 service.addDocsUser(prefs.getUsername(), body).enqueue(object : Callback<Usuario>{
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                        val t = Toast.makeText(activity, "Book added to library", Toast.LENGTH_SHORT)
+                        val t = Toast.makeText(activity, getString(R.string.book_added), Toast.LENGTH_SHORT)
                         t.show()
                         val activity = view.context as AppCompatActivity
                         val transit = LibraryFragment()
