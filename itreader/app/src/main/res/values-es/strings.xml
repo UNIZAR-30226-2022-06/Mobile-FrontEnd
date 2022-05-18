@@ -43,4 +43,8 @@
     <string name="alert_delete_to_library">No se pudo borrar el libro de la bilioteca</string>
     <string name="book_added">Añadido a la biblioteca</string>
     <string name="book_deleted">Eliminado de la biblioteca</string>
+    <string name="confirm">Confirmar</string>
+    <string name="confirm_changes">Confirmar cambios:</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="rating_made">Valoración realizada</string>
 </resources>

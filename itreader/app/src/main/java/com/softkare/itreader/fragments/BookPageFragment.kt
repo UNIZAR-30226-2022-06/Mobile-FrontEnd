@@ -1,5 +1,6 @@
 package com.softkare.itreader.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.softkare.itreader.R
-import com.softkare.itreader.backend.Documento
 import com.softkare.itreader.backend.Libro
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import com.softkare.itreader.backend.Usuario
@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class BookPageFragment : Fragment() {
     lateinit var user : Usuario
+    lateinit var mCtx : Context
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +34,8 @@ class BookPageFragment : Fragment() {
     ): View? {
         lateinit var view: View
         val bundle : Bundle? = this.arguments
-        val book : Libro = bundle?.getSerializable("book") as Libro
+        var book : Libro = bundle?.getSerializable("book") as Libro
+        mCtx = requireContext()
 
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -72,7 +74,7 @@ class BookPageFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                        showAlertDelete()
+                        println("ERROR AL ELIMINAR DE LA BIBLIOTECA")
                     }
                 })
             }
@@ -101,7 +103,7 @@ class BookPageFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                        showAlertAdd()
+                        println("ERROR AL AÑADIR A LA BIBLIOTECA")
                     }
                 })
             }
@@ -111,32 +113,50 @@ class BookPageFragment : Fragment() {
         val bookImage : ImageView = view.findViewById(R.id.book_page_image)
         val author : TextView = view.findViewById(R.id.autor)
         val editorial : TextView = view.findViewById(R.id.editorial)
-        val rating : RatingBar = view.findViewById(R.id.rating)
+        val rate : RatingBar = view.findViewById(R.id.rating)
+        val buttonRate : Button = view.findViewById(R.id.buttonRate)
 
         Glide.with(bookImage.context).load(book.linkPortada).into(bookImage)
         bookTitle.setText(book.nombre)
         author.setText(book.autor)
         editorial.setText("Edelvives")
-        rating.rating = 3.5F
+        rate.rating = 3.5F
 
+        rate.setOnRatingBarChangeListener { ratingBar, rating, _ -> ratingBar.rating = 3.5F }
+
+        buttonRate.setOnClickListener {
+            val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
+            val vista = layoutInflater.inflate(R.layout.dialograte, null)
+            if (builder != null) { builder.setView(vista) }
+            val dialog = builder?.create()
+            if (dialog != null) { dialog.show() }
+            val ratingEdit = vista.findViewById<RatingBar>(R.id.edit_rate)
+            ratingEdit.setOnRatingBarChangeListener { ratingBar: RatingBar, rating: Float, _ ->
+                val MEDIA_TYPE_JSON: MediaType? = MediaType.parse("application/json; charset=utf-8")
+                val J = JSONObject()
+                J.put("valoracion", rating)
+                val body: RequestBody = RequestBody.create(MEDIA_TYPE_JSON, J.toString())
+                if (dialog != null) {
+                    dialog.hide()
+                }
+                service.valorarLibro(book.nombre, body).enqueue(object : Callback<Libro> {
+                    override fun onResponse(call: Call<Libro>, response: Response<Libro>) {
+                        Toast.makeText(
+                            mCtx,
+                            getString(R.string.rating_made) + ": $rating",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        if (response.body() != null) {
+                            ratingBar.rating = rating
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Libro>, t: Throwable) {
+                        println("ERROR AL VALORAR EL LIBRO")
+                    }
+                })
+            }
+        }
         return view
-    }
-
-    private fun showAlertDelete(){
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("Error")
-        builder.setMessage(getString(R.string.alert_delete_to_library))
-        builder.setPositiveButton("Ok",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun showAlertAdd(){
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("Error")
-        builder.setMessage(getString(R.string.alert_add_to_library))
-        builder.setPositiveButton("Ok",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 }

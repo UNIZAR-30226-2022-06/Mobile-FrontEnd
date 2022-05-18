@@ -77,4 +77,7 @@ public interface MyApiEndpointInterface {
 
     @GET("enviarCorreo/{correo}")
     Call<Usuario> enviarCorreo(@Path("correo")String correo);
+
+    @PUT("valorarLibro/{nombre}/")
+    Call<Libro> valorarLibro(@Path("nombre") String nomLibro, @Body RequestBody body);
 }

@@ -23,6 +23,8 @@
         <entry key="app/src/main/res/drawable/searchview_background.xml" value="0.221" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.17271078875793291" />
+        <entry key="app/src/main/res/layout/dialogpassword.xml" value="0.2013681060282172" />
+        <entry key="app/src/main/res/layout/dialograte.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_book_page.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_book_page_in_library.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_catalog.xml" value="0.27395833333333336" />
