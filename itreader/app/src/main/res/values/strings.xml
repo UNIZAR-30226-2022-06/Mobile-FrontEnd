@@ -46,4 +46,12 @@
     <string name="confirm_changes">Confirm changes:</string>
     <string name="current_password">Current password</string>
     <string name="rating_made">Rating made</string>
+    <string name="no_next_page">There is not next page</string>
+    <string name="textsize_small">Small text</string>
+    <string name="textsize_medium">Medium text</string>
+    <string name="textsize_large">Large text</string>
+    <string name="textcolor_blackonwhite">Black on white</string>
+    <string name="textcolor_whiteonblack">White on black</string>
+    <string name="textcolor_warm">Warm colors</string>
+    <string name="textsearch_label">Search in book</string>
 </resources>

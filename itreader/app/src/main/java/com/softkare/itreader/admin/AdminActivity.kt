@@ -2,6 +2,7 @@ package com.softkare.itreader.admin
 
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
@@ -40,9 +41,9 @@ class AdminActivity : AppCompatActivity() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         service.libroList().enqueue(object : Callback<List<Libro>> {
             override fun onResponse(call: Call<List<Libro>>, response: Response<List<Libro>>) {
-                if(response.body() != null){
+                if(response.body() != null) {
                     list = response.body()!!
-                    recyclerView.adapter = catalogAdapter(list)
+                    recyclerView.adapter = catalogAdapter(list, this@AdminActivity)
                 }
             }
 

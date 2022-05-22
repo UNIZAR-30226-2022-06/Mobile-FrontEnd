@@ -42,7 +42,6 @@ class BookPageFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-
         service.getUser(prefs.getUsername()).enqueue(object : Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                 user = response.body()!!
@@ -80,7 +79,15 @@ class BookPageFragment : Fragment() {
             }
 
             buttonRead.setOnClickListener {
-                //TODO: Saltar a la pantalla de visualización del libro
+                val bundle = Bundle()
+                bundle.putSerializable("book", book)
+                val activity = view.context as AppCompatActivity
+                val transit = BookVisualizer()
+                transit.arguments = bundle
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, transit)
+                    .addToBackStack(null)
+                    .commit()
             }
         } else {
             view = inflater.inflate(R.layout.fragment_book_page, container, false)
@@ -141,11 +148,7 @@ class BookPageFragment : Fragment() {
                 }
                 service.valorarLibro(book.nombre, body).enqueue(object : Callback<Libro> {
                     override fun onResponse(call: Call<Libro>, response: Response<Libro>) {
-                        Toast.makeText(
-                            mCtx,
-                            getString(R.string.rating_made) + ": $rating",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(mCtx, getString(R.string.rating_made) + ": $rating", Toast.LENGTH_SHORT).show()
                         if (response.body() != null) {
                             ratingBar.rating = rating
                         }

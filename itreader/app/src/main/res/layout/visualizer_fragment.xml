@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="413dp"
+        android:layout_height="129dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/book_page_title"
+            android:layout_width="300dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="68dp"
+            android:paddingStart="24dp"
+            android:paddingTop="20dp"
+            android:text="Titulo del libro"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+        <ImageView
+            android:id="@+id/arrow_back"
+            android:layout_width="59dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            tools:tint="@color/BLUEBACK"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/book_page_title"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/arrow_forward"
+            android:layout_width="59dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            tools:tint="@color/BLUEBACK"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView7"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/book_page_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/buttonSize"
+            android:layout_width="44dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_baseline_text_fields_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            tools:tint="@color/GREENBACK" />
+
+        <ImageView
+            android:id="@+id/buttonColor"
+            android:layout_width="44dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_baseline_palette_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonSize"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            tools:tint="@color/GREENBACK" />
+
+        <ImageView
+            android:id="@+id/buttonSearch"
+            android:layout_width="44dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonColor"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            tools:tint="@color/GREENBACK" />
+
+        <ImageView
+            android:id="@+id/buttonBookmark"
+            android:layout_width="44dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_baseline_bookmark_add_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonSearch"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            tools:tint="@color/GREENBACK" />
+
+        <ImageView
+            android:id="@+id/buttonFont"
+            android:layout_width="44dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_baseline_title_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/buttonBookmark"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            tools:tint="@color/GREENBACK" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/page_content"
+                android:layout_width="414dp"
+                android:layout_height="743dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif"
+                android:text="TEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEERTEXTO CON EL CONTENIDO DEL LIBRO QUE SE VA A LEER"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

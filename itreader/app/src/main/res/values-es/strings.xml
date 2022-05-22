@@ -47,4 +47,12 @@
     <string name="confirm_changes">Confirmar cambios:</string>
     <string name="current_password">Contraseña actual</string>
     <string name="rating_made">Valoración realizada</string>
+    <string name="no_next_page">No hay página siguiente</string>
+    <string name="textsize_small">Texto pequeño</string>
+    <string name="textsize_medium">Texto mediano</string>
+    <string name="textsize_large">Texto grande</string>
+    <string name="textcolor_blackonwhite">Negro sobre blanco</string>
+    <string name="textcolor_whiteonblack">Blanco sobre negro</string>
+    <string name="textcolor_warm">Colores cálidos</string>
+    <string name="textsearch_label">Buscar en el libro</string>
 </resources>

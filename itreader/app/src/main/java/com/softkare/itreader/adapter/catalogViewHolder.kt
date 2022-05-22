@@ -16,6 +16,8 @@ class catalogViewHolder(view:View) : RecyclerView.ViewHolder(view) {
     val title = view.findViewById<TextView>(R.id.titulo)
     val autor = view.findViewById<TextView>(R.id.autor)
     val photo = view.findViewById<ImageView>(R.id.imageViewBook)
+    val edit = view.findViewById<ImageView>(R.id.editButton)
+    val delete = view.findViewById<ImageView>(R.id.deleteButton)
 
     fun render(book: Libro){
         title.text = book.nombre
