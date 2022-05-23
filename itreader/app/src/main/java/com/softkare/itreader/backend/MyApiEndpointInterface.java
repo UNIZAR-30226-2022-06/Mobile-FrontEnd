@@ -54,6 +54,9 @@ public interface MyApiEndpointInterface {
     @PUT("deleteDocUsuario/{nomUsuario}/")
     Call<ResponseBody> deleteDocUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Query("nomLibro") String nomLibro);
 
+    @PUT("deleteLibroUsuario/{nomUsuario}/")
+    Call<ResponseBody> deleteLibroUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Query("nomLibro") String nomLibro);
+
     @DELETE("deleteUsuario/{nomUsuario}/")
     Call<ResponseBody> deleteUser(@Path("nomUsuario") String nomUsuario);
 

@@ -81,4 +81,5 @@
     <string name="create_bm">Crear nuevo marcador</string>
     <string name="list_all_bm">Listar todos los marcadores</string>
     <string name="bookmark_list_label">Tus marcadores</string>
+    <string name="deleted_doc">Documento borrado</string>
 </resources>

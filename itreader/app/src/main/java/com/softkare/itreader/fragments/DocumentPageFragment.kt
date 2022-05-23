@@ -50,13 +50,11 @@ class DocumentPageFragment : Fragment() {
             println(documento.nombre+".pdf")
             service.leerLibro(documento.nombre+".pdf" ,1).enqueue(object : Callback<PaginaLibro> {
                 override fun onResponse(call: Call<PaginaLibro>, response: Response<PaginaLibro>) {
-                    if(response.body() != null){
+                    if(response.body() != null) {
                         val link : String? = response.body()!!.contenido
                         if (link != null) {
                             leerLibro(link)
                         }
-                    }else{
-                        println("error")
                     }
                 }
 
@@ -76,7 +74,7 @@ class DocumentPageFragment : Fragment() {
             println(documento.nombre+".pdf")
             service.deleteDocUsuario(prefs.getUsername() ,documento.nombre).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    Toast.makeText(requireContext(),"Libro Borrado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),getString(R.string.deleted_doc), Toast.LENGTH_SHORT).show()
                     volver()
                 }
 

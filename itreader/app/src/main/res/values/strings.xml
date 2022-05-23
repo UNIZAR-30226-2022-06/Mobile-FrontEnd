@@ -80,4 +80,5 @@
     <string name="create_bm">Create new bookmark</string>
     <string name="list_all_bm">List all bookmarks</string>
     <string name="bookmark_list_label">Your bookmarks</string>
+    <string name="deleted_doc">Document deleted</string>
 </resources>

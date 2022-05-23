@@ -1,6 +1,5 @@
 package com.softkare.itreader.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import com.softkare.itreader.backend.Usuario
 import com.softkare.itreader.sharedPreferences.Companion.prefs
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -87,7 +85,7 @@ class BookPageFragment : Fragment() {
             val dialog = builder?.create()
             dialog?.show()
             val ratingEdit = vista.findViewById<RatingBar>(R.id.edit_rate)
-            ratingEdit.setOnRatingBarChangeListener { ratingBar: RatingBar, rating: Float, _ ->
+            ratingEdit.setOnRatingBarChangeListener { _, rating, _ ->
                 val MEDIA_TYPE_JSON: MediaType? = MediaType.parse("application/json; charset=utf-8")
                 val J = JSONObject()
                 J.put("valoracion", rating)

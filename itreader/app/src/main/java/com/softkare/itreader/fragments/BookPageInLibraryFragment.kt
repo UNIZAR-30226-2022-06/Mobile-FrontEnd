@@ -42,7 +42,7 @@ class BookPageInLibraryFragment : Fragment() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
 
         buttonDelete.setOnClickListener {
-            service.deleteDocUsuario(sharedPreferences.prefs.getUsername(), book.nombre).enqueue(object :
+            service.deleteLibroUsuario(sharedPreferences.prefs.getUsername(), book.nombre).enqueue(object :
                 Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     Toast.makeText(activity, getString(R.string.book_deleted), Toast.LENGTH_SHORT).show()
