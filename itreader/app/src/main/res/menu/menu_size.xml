@@ -9,4 +9,7 @@
     <item
         android:id="@+id/large"
         android:title="@string/textsize_large" />
+    <item
+        android:id="@+id/very_large"
+        android:title="@string/textsize_very_large" />
 </menu>

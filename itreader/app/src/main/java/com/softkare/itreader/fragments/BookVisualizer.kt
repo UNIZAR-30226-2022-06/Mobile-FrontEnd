@@ -21,6 +21,7 @@ class BookVisualizer : Fragment() {
     private val textSmallSize = 12F
     private val textMediumSize = 16F
     private val textLargeSize = 24F
+    private val textVeryLargeSize = 36F
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,6 +70,7 @@ class BookVisualizer : Fragment() {
                     R.id.small  -> content.textSize = textSmallSize
                     R.id.medium -> content.textSize = textMediumSize
                     R.id.large  -> content.textSize = textLargeSize
+                    R.id.very_large -> content.textSize = textVeryLargeSize
                 }
                 true
             }
@@ -156,6 +158,8 @@ class BookVisualizer : Fragment() {
                     R.id.sans_serif -> content.typeface = Typeface.SANS_SERIF
                     R.id.monospace -> content.typeface = Typeface.MONOSPACE
                     R.id.serif -> content.typeface = Typeface.SERIF
+                    R.id.align_start -> content.gravity = 0
+                    R.id.align_center -> content.gravity = 1
                 }
                 true
             }

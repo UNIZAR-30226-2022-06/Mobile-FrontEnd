@@ -58,10 +58,13 @@
     <string name="textsize_small">Small text</string>
     <string name="textsize_medium">Medium text</string>
     <string name="textsize_large">Large text</string>
+    <string name="textsize_very_large">Very large text</string>
     <string name="textcolor_blackonwhite">Black on white</string>
     <string name="textcolor_whiteonblack">White on black</string>
     <string name="textcolor_warm">Warm colors</string>
     <string name="textsearch_label">Search in book</string>
+    <string name="textstyle_alignStart">Align to start</string>
+    <string name="textstyle_alignCenter">Align to center</string>
     <string name="password_error">Password Error</string>
     <string name="reset_password_error">Reset Password Error</string>
     <string name="email_error">Email Error</string>

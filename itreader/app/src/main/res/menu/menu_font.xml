@@ -12,4 +12,10 @@
         android:id="@+id/serif"
         android:title="Serif"
         android:fontFamily="serif"/>
+    <item
+        android:id="@+id/align_start"
+        android:title="@string/textstyle_alignStart" />
+    <item
+        android:id="@+id/align_center"
+        android:title="@string/textstyle_alignCenter" />
 </menu>
