@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.method.ScrollingMovementMethod
 import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +17,10 @@ import com.softkare.itreader.R
 import com.softkare.itreader.backend.Libro
 
 class BookVisualizer : Fragment() {
-    var sizeOption = 1
-    var colorOption = 1
-    var fontOption = 1
-    val textSmallSize = 20F
-    val textMediumSize = 30F
-    val textLargeSize = 40F
+    private var style = 1
+    private val textSmallSize = 12F
+    private val textMediumSize = 16F
+    private val textLargeSize = 24F
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,16 +31,17 @@ class BookVisualizer : Fragment() {
         val view = inflater.inflate(R.layout.visualizer_fragment, container, false)
         val arrowBack : ImageView = view.findViewById(R.id.arrow_back)
         val arrowForward : ImageView = view.findViewById(R.id.arrow_forward)
-        val title : TextView = view.findViewById(R.id.book_page_title)
-        val content : TextView = view.findViewById(R.id.page_content)
+        val content : TextView = view.findViewById(R.id.content)
         val buttonSize : ImageView = view.findViewById(R.id.buttonSize)
         val buttonColor : ImageView = view.findViewById(R.id.buttonColor)
         val buttonSearch : ImageView = view.findViewById(R.id.buttonSearch)
         val buttonBookmark : ImageView = view.findViewById(R.id.buttonBookmark)
         val buttonFont : ImageView = view.findViewById(R.id.buttonFont)
 
-        title.text = book.nombre
         val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
+        content.textSize = textMediumSize
+        content.movementMethod = ScrollingMovementMethod.getInstance()
+        content.text = "Aquí irá el contenido de la página recibida"
 
         arrowBack.setOnClickListener {
             //TODO: Pasar a página anterior o, si es la primera, volver a BookPageFragment
@@ -61,119 +61,87 @@ class BookVisualizer : Fragment() {
             Toast.makeText(activity, getString(R.string.no_next_page), Toast.LENGTH_SHORT).show()
         }
 
-        // FUNCIONALIDAD DE CAMBIAR TAMAÑO DE TEXTO
         buttonSize.setOnClickListener {
-            val vista = layoutInflater.inflate(R.layout.dialog_textsize, null)
-            if (builder != null) { builder.setView(vista) }
-            val dialog = builder?.create()
-            if (dialog != null) { dialog.show() }
-            val buttonSmall : ImageView = vista.findViewById(R.id.buttonSmall)
-            val buttonMedium : ImageView = vista.findViewById(R.id.buttonMedium)
-            val buttonLarge : ImageView = vista.findViewById(R.id.buttonLarge)
-            buttonSmall.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (sizeOption != 1) {
-                    buttonSmall.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonMedium.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonLarge.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.textSize = textSmallSize
-                    sizeOption = 1
+            val popupMenu = PopupMenu(requireContext(), buttonSize)
+            popupMenu.menuInflater.inflate(R.menu.menu_size, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener{ item ->
+                when (item.itemId) {
+                    R.id.small  -> content.textSize = textSmallSize
+                    R.id.medium -> content.textSize = textMediumSize
+                    R.id.large  -> content.textSize = textLargeSize
                 }
+                true
             }
-
-            buttonMedium.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (sizeOption != 2) {
-                    buttonSmall.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonMedium.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonLarge.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.textSize = textMediumSize
-                    sizeOption = 2
-                }
-            }
-
-            buttonLarge.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (sizeOption != 3) {
-                    buttonSmall.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonMedium.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonLarge.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    content.textSize = textLargeSize
-                    sizeOption = 3
-                }
-            }
+            popupMenu.show()
         }
 
-        // FUNCIONALIDAD DE CAMBIAR COLOR DE FONDO Y TEXTO
         buttonColor.setOnClickListener {
-            val vista = layoutInflater.inflate(R.layout.dialog_backgroundcolor, null)
-            if (builder != null) { builder.setView(vista) }
-            val dialog = builder?.create()
-            if (dialog != null) { dialog.show() }
-            val buttonBoW : ImageView = vista.findViewById(R.id.buttonBoW)
-            val buttonWoB : ImageView = vista.findViewById(R.id.buttonWoB)
-            val buttonWarm : ImageView = vista.findViewById(R.id.buttonWarm)
-            buttonBoW.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (colorOption != 1) {
-                    buttonBoW.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonWoB.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonWarm.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.setTextColor(resources.getColor(R.color.black))
-                    content.setBackgroundColor(resources.getColor(R.color.white))
-                    colorOption = 1
+            val popupMenu = PopupMenu(requireContext(), buttonColor)
+            popupMenu.menuInflater.inflate(R.menu.menu_style, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener {item ->
+                when (item.itemId) {
+                    R.id.bow -> {
+                        style = 1
+                        content.setTextColor(resources.getColor(R.color.black))
+                        content.setBackgroundColor(resources.getColor(R.color.white))
+                    }
+                    R.id.wob -> {
+                        style = 2
+                        content.setTextColor(resources.getColor(R.color.white))
+                        content.setBackgroundColor(resources.getColor(R.color.black))
+                    }
+                    R.id.warm -> {
+                        style = 3
+                        content.setTextColor(resources.getColor(R.color.BLUEBACK))
+                        content.setBackgroundColor(resources.getColor(R.color.light_orange))
+                    }
                 }
+                true
             }
-
-            buttonWoB.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (colorOption != 2) {
-                    buttonBoW.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonWoB.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonWarm.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.setTextColor(resources.getColor(R.color.white))
-                    content.setBackgroundColor(resources.getColor(R.color.black))
-                    colorOption = 2
-                }
-            }
-
-            buttonWarm.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (colorOption != 3) {
-                    buttonBoW.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonWoB.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonWarm.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    content.setTextColor(resources.getColor(R.color.BLUEBACK))
-                    content.setBackgroundColor(resources.getColor(R.color.light_orange))
-                    colorOption = 3
-                }
-            }
+            popupMenu.show()
         }
 
-        // FUNCIONALIDAD DE BUSCAR PALABRAS EN TEXTO
         buttonSearch.setOnClickListener {
             val vista = layoutInflater.inflate(R.layout.dialog_textsearch, null)
-            if (builder != null) { builder.setView(vista) }
+            if (builder != null) {
+                builder.setView(vista)
+            }
             val dialog = builder?.create()
-            if (dialog != null) { dialog.show() }
-            val searchText : EditText = vista.findViewById(R.id.searchEditText)
-            val buttonConfirmSearch : Button = vista.findViewById(R.id.buttonConfirmSearch)
+            if (dialog != null) {
+                dialog.show()
+            }
+            val searchText: EditText = vista.findViewById(R.id.searchEditText)
+            val buttonConfirmSearch: Button = vista.findViewById(R.id.buttonConfirmSearch)
             buttonConfirmSearch.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
+                if (dialog != null) {
+                    dialog.hide()
+                }
                 resetSearchVisualizer(content)
                 val spannableString = SpannableString(content.text)
-                val index = content.text.indexOf(searchText.text.toString(), 0, false)
+                var index = content.text.indexOf(searchText.text.toString(), 0, true)
                 if (index >= 0) {
-                    spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.green)), index,
-                        index + content.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    var nFound = 1
+                    spannableString.setSpan(
+                        BackgroundColorSpan(resources.getColor(R.color.green)), index,
+                        index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    while (index >= 0) {
+                        index = content.text.indexOf(searchText.text.toString(), index+1, true)
+                        if (index >= 0) {
+                            spannableString.setSpan(
+                                BackgroundColorSpan(resources.getColor(R.color.green)), index,
+                                index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                            nFound++
+                        }
+                    }
                     content.text = spannableString
+                    val textResults : String = nFound.toString() + " " + "resultados"
+                    Toast.makeText(requireContext(), textResults, Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.no_occurrences), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "No hay resultados", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        // FUNCIONALIDAD DE CREAR BOOKMARKS
         buttonBookmark.setOnClickListener {
             //TODO: Gestion de Boorkmarks (por página)
             Toast.makeText(requireContext(), "Función por implementar", Toast.LENGTH_SHORT).show()
@@ -181,45 +149,17 @@ class BookVisualizer : Fragment() {
 
         // FUNCIONALIDAD DE CAMBIAR LA FUENTE
         buttonFont.setOnClickListener {
-            val vista = layoutInflater.inflate(R.layout.dialog_textsearch, null)
-            if (builder != null) { builder.setView(vista) }
-            val dialog = builder?.create()
-            if (dialog != null) { dialog.show() }
-            val buttonSansSerif : ImageView = vista.findViewById(R.id.buttonSansSerif)
-            val buttonMonospace : ImageView = vista.findViewById(R.id.buttonMonospace)
-            val buttonSerif : ImageView = vista.findViewById(R.id.buttonSerif)
-            buttonSansSerif.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (fontOption != 1) {
-                    buttonSansSerif.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonMonospace.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonSerif.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.typeface = Typeface.SANS_SERIF
-                    fontOption = 1
+            val popupMenu = PopupMenu(requireContext(), buttonFont)
+            popupMenu.menuInflater.inflate(R.menu.menu_font, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.sans_serif -> content.typeface = Typeface.SANS_SERIF
+                    R.id.monospace -> content.typeface = Typeface.MONOSPACE
+                    R.id.serif -> content.typeface = Typeface.SERIF
                 }
+                true
             }
-
-            buttonMonospace.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (fontOption != 2) {
-                    buttonSansSerif.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonMonospace.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    buttonSerif.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    content.typeface = Typeface.MONOSPACE
-                    fontOption = 2
-                }
-            }
-
-            buttonSerif.setOnClickListener {
-                if (dialog != null) { dialog.hide() }
-                if (fontOption != 3) {
-                    buttonSansSerif.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonMonospace.setImageResource(R.drawable.ic_baseline_radio_button_unchecked_24)
-                    buttonSerif.setImageResource(R.drawable.ic_baseline_radio_button_checked_24)
-                    content.typeface = Typeface.SERIF
-                    fontOption = 3
-                }
-            }
+            popupMenu.show()
         }
 
         return view
@@ -227,7 +167,7 @@ class BookVisualizer : Fragment() {
 
     private fun resetSearchVisualizer(content : TextView) {
         val spannableString = SpannableString(content.text)
-        when (colorOption) {
+        when (style) {
             1 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.white)),
                 0, 1000, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             2 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.black)),
