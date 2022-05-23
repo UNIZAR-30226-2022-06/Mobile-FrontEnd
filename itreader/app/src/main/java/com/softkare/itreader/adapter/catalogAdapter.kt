@@ -25,10 +25,6 @@ class catalogAdapter(private val bookCatalog: List<Libro>, val mCtx : Context) :
     override fun onBindViewHolder(holder: catalogViewHolder, position: Int) {
         val item = bookCatalog[position]
         holder.render(item)
-        holder.edit.setOnClickListener {
-            //TODO: Funcionalidad de editar un libro del catálogo
-            Toast.makeText(mCtx, "Función por implementar", Toast.LENGTH_SHORT).show()
-        }
         holder.delete.setOnClickListener {
             val retrofit = Retrofit.Builder()
                 .baseUrl(MyApiEndpointInterface.BASE_URL)

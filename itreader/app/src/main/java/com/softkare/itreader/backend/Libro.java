@@ -3,6 +3,7 @@ package com.softkare.itreader.backend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class Libro implements Serializable {
@@ -13,9 +14,6 @@ public class Libro implements Serializable {
     @SerializedName("nombre")
     @Expose
     private String nombre;
-    @SerializedName("formato")
-    @Expose
-    private String formato;
     @SerializedName("linkDocumento")
     @Expose
     private String linkDocumento;
@@ -28,14 +26,30 @@ public class Libro implements Serializable {
     @SerializedName("autor")
     @Expose
     private String autor;
+    @SerializedName("editorial")
+    @Expose
+    private String editorial;
+    @SerializedName("coverLib")
+    @Expose
+    private String coverLib;
+    @SerializedName("valoracion")
+    @Expose
+    private Float valoracion;
+    @SerializedName("numValoraciones")
+    @Expose
+    private int numValoraciones;
 
-    public Libro(String nombre, String linkDocumento, String linkPortada, String ISBN, String autor) {
+    public Libro(String nombre, String linkDocumento, String linkPortada, String ISBN, String autor,
+                 String editorial, String coverLib, Float valoracion, int numValoraciones) {
         this.nombre = nombre;
-        this.formato = "epub";
         this.linkDocumento = linkDocumento;
         this.linkPortada = linkPortada;
         this.ISBN = ISBN;
         this.autor = autor;
+        this.editorial = editorial;
+        this.coverLib = coverLib;
+        this.valoracion = valoracion;
+        this.numValoraciones = numValoraciones;
     }
 
     public Integer getId() {
@@ -52,14 +66,6 @@ public class Libro implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getFormato() {
-        return formato;
-    }
-
-    public void setFormato(String formato) {
-        this.formato = formato;
     }
 
     public String getLinkDocumento() {
@@ -92,5 +98,37 @@ public class Libro implements Serializable {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
+    public String getCoverLib() {
+        return coverLib;
+    }
+
+    public void setCoverLib(String coverLib) {
+        this.coverLib = coverLib;
+    }
+
+    public Float getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(Float valoracion) {
+        this.valoracion = valoracion;
+    }
+
+    public int getNumValoraciones() {
+        return numValoraciones;
+    }
+
+    public void setNumValoraciones(int numValoraciones) {
+        this.numValoraciones = numValoraciones;
     }
 }

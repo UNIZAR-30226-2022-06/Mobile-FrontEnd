@@ -36,6 +36,7 @@ class BookPageFragment : Fragment() {
         val bundle : Bundle? = this.arguments
         var book : Libro = bundle?.getSerializable("book") as Libro
         mCtx = requireContext()
+        user = Usuario("","","", "", false)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -59,7 +60,7 @@ class BookPageFragment : Fragment() {
             val buttonDelete = view.findViewById<Button>(R.id.buttonDeleteLibrary)
             val buttonRead = view.findViewById<Button>(R.id.buttonRead)
             buttonDelete.setOnClickListener {
-                service.deleteDocUser(prefs.getUsername(), book.nombre).enqueue(object : Callback<Usuario>{
+                service.deleteDocUsuario(prefs.getUsername(), book.nombre).enqueue(object : Callback<Usuario> {
                     override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
                         val t = Toast.makeText(activity, getString(R.string.book_deleted), Toast.LENGTH_SHORT)
                         t.show()
@@ -129,7 +130,7 @@ class BookPageFragment : Fragment() {
         editorial.setText("Edelvives")
         rate.rating = 3.5F
 
-        rate.setOnRatingBarChangeListener { ratingBar, rating, _ -> ratingBar.rating = 3.5F }
+        rate.setOnRatingBarChangeListener { ratingBar, _, _ -> ratingBar.rating = 3.5F }
 
         buttonRate.setOnClickListener {
             val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }

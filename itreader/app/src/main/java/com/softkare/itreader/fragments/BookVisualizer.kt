@@ -13,11 +13,18 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
+import com.softkare.itreader.adapter.bookmarkAdapter
 import com.softkare.itreader.backend.Libro
+import com.softkare.itreader.backend.MyApiEndpointInterface
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class BookVisualizer : Fragment() {
     private var style = 1
+    private var pageNumber = 1
     private val textSmallSize = 12F
     private val textMediumSize = 16F
     private val textLargeSize = 24F
@@ -46,6 +53,7 @@ class BookVisualizer : Fragment() {
 
         arrowBack.setOnClickListener {
             //TODO: Pasar a página anterior o, si es la primera, volver a BookPageFragment
+            //pageNumber--
             val bundle = Bundle()
             bundle.putSerializable("book", book)
             val activity = view.context as AppCompatActivity
@@ -60,6 +68,7 @@ class BookVisualizer : Fragment() {
         arrowForward.setOnClickListener {
             //TODO: Pasar a página siguiente si existe
             Toast.makeText(activity, getString(R.string.no_next_page), Toast.LENGTH_SHORT).show()
+            //pageNumber++
         }
 
         buttonSize.setOnClickListener {
@@ -105,19 +114,13 @@ class BookVisualizer : Fragment() {
 
         buttonSearch.setOnClickListener {
             val vista = layoutInflater.inflate(R.layout.dialog_textsearch, null)
-            if (builder != null) {
-                builder.setView(vista)
-            }
+            builder?.setView(vista)
             val dialog = builder?.create()
-            if (dialog != null) {
-                dialog.show()
-            }
+            dialog?.show()
             val searchText: EditText = vista.findViewById(R.id.searchEditText)
             val buttonConfirmSearch: Button = vista.findViewById(R.id.buttonConfirmSearch)
             buttonConfirmSearch.setOnClickListener {
-                if (dialog != null) {
-                    dialog.hide()
-                }
+                dialog?.hide()
                 resetSearchVisualizer(content)
                 val spannableString = SpannableString(content.text)
                 var index = content.text.indexOf(searchText.text.toString(), 0, true)
@@ -136,20 +139,37 @@ class BookVisualizer : Fragment() {
                         }
                     }
                     content.text = spannableString
-                    val textResults : String = nFound.toString() + " " + "resultados"
+                    val textResults : String = nFound.toString() + " " + getString(R.string.results)
                     Toast.makeText(requireContext(), textResults, Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "No hay resultados", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.no_results), Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
         buttonBookmark.setOnClickListener {
-            //TODO: Gestion de Boorkmarks (por página)
-            Toast.makeText(requireContext(), "Función por implementar", Toast.LENGTH_SHORT).show()
+            val popupMenu = PopupMenu(requireContext(), buttonBookmark)
+            popupMenu.menuInflater.inflate(R.menu.menu_bookmarks, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener {item ->
+                when (item.itemId) {
+                    R.id.create_bookmark -> {
+                        Toast.makeText(requireContext(), "Falta servicio de añadir", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.list_bookmarks  -> {
+                        val vista = layoutInflater.inflate(R.layout.dialog_bookmarklist, null)
+                        builder?.setView(vista)
+                        val dialog = builder?.create()
+                        dialog?.show()
+                        val recyclerView : RecyclerView = vista.findViewById(R.id.recyclerBookmarks)
+                        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                        getBookmarkList(recyclerView)
+                    }
+                }
+                true
+            }
+            popupMenu.show()
         }
 
-        // FUNCIONALIDAD DE CAMBIAR LA FUENTE
         buttonFont.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), buttonFont)
             popupMenu.menuInflater.inflate(R.menu.menu_font, popupMenu.menu)
@@ -179,5 +199,16 @@ class BookVisualizer : Fragment() {
             3 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.light_orange)),
                 0, 1000, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
+    }
+
+    private fun getBookmarkList(recyclerView: RecyclerView) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(MyApiEndpointInterface.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(MyApiEndpointInterface::class.java)
+        //TODO: Llamar a servicio que devuelve la lista de marcadores
+        val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe")
+        recyclerView.adapter = bookmarkAdapter(list, requireContext())
     }
 }

@@ -37,7 +37,7 @@ class AdminActivity : AppCompatActivity() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.autor.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
                     mRecyclerView.adapter = catalogAdapter(sublist, this@AdminActivity)
@@ -49,7 +49,7 @@ class AdminActivity : AppCompatActivity() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.autor.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
                     mRecyclerView.adapter = catalogAdapter(sublist, this@AdminActivity)

@@ -75,4 +75,9 @@
     <string name="changes_saved">Changes saved</string>
     <string name="no_occurrences">No occurrences</string>
     <string name="delete_from_catalog">Book deleted from catalog</string>
+    <string name="results">Results</string>
+    <string name="no_results">There are no results</string>
+    <string name="create_bm">Create new bookmark</string>
+    <string name="list_all_bm">List all bookmarks</string>
+    <string name="bookmark_list_label">Your bookmarks</string>
 </resources>

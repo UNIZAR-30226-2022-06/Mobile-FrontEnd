@@ -76,4 +76,9 @@
     <string name="changes_saved">Cambios guardados</string>
     <string name="no_occurrences">No hay ocurrencias</string>
     <string name="delete_from_catalog">Libro eliminado del catálogo</string>
+    <string name="results">Resultados</string>
+    <string name="no_results">No hay resultados</string>
+    <string name="create_bm">Crear nuevo marcador</string>
+    <string name="list_all_bm">Listar todos los marcadores</string>
+    <string name="bookmark_list_label">Tus marcadores</string>
 </resources>

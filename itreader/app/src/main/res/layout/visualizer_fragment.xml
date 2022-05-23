@@ -94,7 +94,7 @@
             android:layout_height="47dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/ic_baseline_bookmark_add_24"
+            android:src="@drawable/ic_baseline_bookmarks_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonSearch"

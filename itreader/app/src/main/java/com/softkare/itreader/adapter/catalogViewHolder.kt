@@ -1,7 +1,5 @@
 package com.softkare.itreader.adapter
 
-import android.view.ContextMenu
-import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,11 +10,9 @@ import com.softkare.itreader.backend.Libro
 
 class catalogViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
-
     val title = view.findViewById<TextView>(R.id.titulo)
     val autor = view.findViewById<TextView>(R.id.autor)
     val photo = view.findViewById<ImageView>(R.id.imageViewBook)
-    val edit = view.findViewById<ImageView>(R.id.editButton)
     val delete = view.findViewById<ImageView>(R.id.deleteButton)
 
     fun render(book: Libro){

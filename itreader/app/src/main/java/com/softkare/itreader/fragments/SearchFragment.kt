@@ -23,7 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SearchFragment : Fragment() {
     lateinit var list : List<Libro>
     lateinit var sublist : MutableList<Libro>
-    lateinit var mCtx : Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +40,7 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.autor.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
                     recyclerView.adapter = bookAdapter(sublist)
@@ -53,7 +52,7 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.autor.toLowerCase().contains(p0.toString().toLowerCase())) {
+                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
                     recyclerView.adapter = bookAdapter(sublist)
