@@ -15,6 +15,7 @@ public class Documento implements Serializable {
     @SerializedName("linkDocumento")
     private String linkDocumento;
 
+
     public Documento(Integer id, String nombre, String formato, String linkDocumento) {
         this.id = id;
         this.nombre = nombre;
