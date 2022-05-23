@@ -45,17 +45,7 @@ class AdminActivity : AppCompatActivity() {
                 return false
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                searchView.clearFocus()
-                sublist.clear()
-                for (b in list) {
-                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
-                        sublist.add(b)
-                    }
-                    mRecyclerView.adapter = catalogAdapter(sublist, this@AdminActivity)
-                }
-                return false
-            }
+            override fun onQueryTextChange(p0: String?): Boolean = false
         })
 
         buttonUpload.setOnClickListener {

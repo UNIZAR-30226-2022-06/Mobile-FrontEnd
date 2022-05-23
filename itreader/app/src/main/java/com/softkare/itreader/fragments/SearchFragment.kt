@@ -40,25 +40,16 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
+                    if (b.autor.lowercase().contains(p0.toString().lowercase()) ||
+                        b.editorial.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
-                    recyclerView.adapter = bookAdapter(sublist)
                 }
+                recyclerView.adapter = bookAdapter(sublist)
                 return false
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                searchView.clearFocus()
-                sublist.clear()
-                for (b in list) {
-                    if (b.autor.lowercase().contains(p0.toString().lowercase())) {
-                        sublist.add(b)
-                    }
-                    recyclerView.adapter = bookAdapter(sublist)
-                }
-                return false
-            }
+            override fun onQueryTextChange(p0: String?): Boolean = false
         })
 
         return view
