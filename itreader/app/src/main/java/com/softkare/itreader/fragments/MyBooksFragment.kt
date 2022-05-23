@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
@@ -81,7 +82,8 @@ class MyBooksFragment : Fragment() {
             println(path)
             val file = File(path)
             println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            upload(file,uri)
+            Toast.makeText(requireContext(), "La ruta "+path+" no es accesible en este dispositivo", Toast.LENGTH_SHORT).show()
+            //upload(file,uri)
         }
     }
 
