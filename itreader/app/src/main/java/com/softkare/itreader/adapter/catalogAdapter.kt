@@ -3,14 +3,17 @@ package com.softkare.itreader.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
 import com.softkare.itreader.backend.Libro
-import com.softkare.itreader.sharedPreferences
+import com.softkare.itreader.backend.MyApiEndpointInterface
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class catalogAdapter(private val bookCatalog: List<Libro>, val mCtx : Context) : RecyclerView.Adapter<catalogViewHolder>() {
 
@@ -27,7 +30,20 @@ class catalogAdapter(private val bookCatalog: List<Libro>, val mCtx : Context) :
             Toast.makeText(mCtx, "Función por implementar", Toast.LENGTH_SHORT).show()
         }
         holder.delete.setOnClickListener {
-            //TODO: Llamar al servicio de eliminar libro del catálogo
+            val retrofit = Retrofit.Builder()
+                .baseUrl(MyApiEndpointInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val service = retrofit.create(MyApiEndpointInterface::class.java)
+            service.deleteLibro(item.nombre).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    Toast.makeText(mCtx, R.string.delete_from_catalog.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    println("ERROR AL ELIMINAR LIBRO DEL CATÁLOGO")
+                }
+            })
         }
     }
 

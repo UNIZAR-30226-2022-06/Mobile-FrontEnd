@@ -11,7 +11,15 @@
     <string name="signup_error">Error en el registro</string>
     <string name="error_message">Ha ocurrido un error</string>
     <string name="empty_field">Usuario o contraseña vacío</string>
+    <string name="empty_email">Correo electrónico vacío</string>
+    <string name="loading">Cargando</string>
+    <string name="wait">Espere, por favor</string>
+    <string name="empty_fields">No has rellenado ningún campo</string>
+    <string name="no_data_to_change">No hay datos para modificar</string>
     <string name="user_mail_already_registered">Este usuario o correo ya está registrado</string>
+    <string name="invalid_data">Datos incorrectos</string>
+    <string name="been_registered">ha sido registrado</string>
+    <string name="been_deleted">ha sido eliminado</string>
     <string name="name">Nombre</string>
     <string name="forgotpass"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="reset">Restablecer</string>
@@ -55,4 +63,14 @@
     <string name="textcolor_whiteonblack">Blanco sobre negro</string>
     <string name="textcolor_warm">Colores cálidos</string>
     <string name="textsearch_label">Buscar en el libro</string>
+    <string name="password_error">Error en la contraseña</string>
+    <string name="reset_password_error">Error al recuperar contraseña</string>
+    <string name="email_error">Error en el correo electrónico</string>
+    <string name="email_not_registered">Este correo electrónico no está registrado</string>
+    <string name="incorrect_email_format">Este formato de correo electrónico es incorrecto</string>
+    <string name="password_format">Formato correcto de la contraseña: 8 caracteres con, al menos, 1 mayúscula, 1 minúscula y 1 dígito</string>
+    <string name="password_sent">La contraseña se ha enviado a</string>
+    <string name="changes_saved">Cambios guardados</string>
+    <string name="no_occurrences">No hay ocurrencias</string>
+    <string name="delete_from_catalog">Libro eliminado del catálogo</string>
 </resources>

@@ -22,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyBooksFragment : Fragment() {
     lateinit var list : List<Documento>
-    lateinit var mCtx : Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,11 +30,11 @@ class MyBooksFragment : Fragment() {
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerDocs)
         val buttonUpload : ImageButton = view.findViewById(R.id.btnUpload)
 
-        recyclerView.layoutManager= LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         getList(recyclerView)
 
-        buttonUpload.setOnClickListener() {
-            //TODO: Llamar a servicio --> createDocumento
+        buttonUpload.setOnClickListener {
+            //TODO: Llamar a servicio --> subirDocumento
         }
 
         return view
@@ -47,30 +46,17 @@ class MyBooksFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        // SE DEBE LLAMAR AL SERVICIO DE LOS DOCUMENTOS SUBIDOS POR EL USUARIO
         service.documentoList().enqueue(object : Callback<List<Documento>> {
             override fun onResponse(call: Call<List<Documento>>, response: Response<List<Documento>>) {
                 if(response.body() != null){
                     list = response.body()!!
                     recyclerView.adapter = documentAdapter(list)
-                }else{
-                    showAlert()
                 }
             }
 
             override fun onFailure(call: Call<List<Documento>>, t: Throwable) {
                 println("ERROR AL RECIBIR LOS DOCUMENTOS DEL USUARIO")
             }
-
         })
-    }
-
-    private fun showAlert(){
-        val builder = AlertDialog.Builder(mCtx)
-        builder.setTitle("Error")
-        builder.setMessage(getString(R.string.no_books))
-        builder.setPositiveButton("Ok",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 }

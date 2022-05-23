@@ -10,7 +10,15 @@
     <string name="signup_error">Sign up error</string>
     <string name="error_message">An error has occurred</string>
     <string name="empty_field">Empty username or password</string>
+    <string name="empty_email">Empty email</string>
+    <string name="loading">Loading</string>
+    <string name="wait">Please wait</string>
+    <string name="empty_fields">You do not have fill any field</string>
+    <string name="no_data_to_change">No data to change</string>
     <string name="user_mail_already_registered">This user or email is already registered</string>
+    <string name="invalid_data">Invalid Data</string>
+    <string name="been_registered">has been registered</string>
+    <string name="been_deleted">has been deleted</string>
     <string name="name">Name</string>
     <string name="forgotpass"><u>Forgot password</u></string>
     <string name="reset">Reset</string>
@@ -54,4 +62,14 @@
     <string name="textcolor_whiteonblack">White on black</string>
     <string name="textcolor_warm">Warm colors</string>
     <string name="textsearch_label">Search in book</string>
+    <string name="password_error">Password Error</string>
+    <string name="reset_password_error">Reset Password Error</string>
+    <string name="email_error">Email Error</string>
+    <string name="email_not_registered">This email is not registered</string>
+    <string name="incorrect_email_format">This email format is incorrect</string>
+    <string name="password_format">Password correct format: 8 characters with at least 1 uppercase and lowercase and 1 number</string>
+    <string name="password_sent">Password has been sent to</string>
+    <string name="changes_saved">Changes saved</string>
+    <string name="no_occurrences">No occurrences</string>
+    <string name="delete_from_catalog">Book deleted from catalog</string>
 </resources>

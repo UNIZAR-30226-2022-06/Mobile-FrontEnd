@@ -24,9 +24,9 @@ class DocumentPageFragment : Fragment() {
         val pageTitle : TextView = view.findViewById(R.id.doc_page_title)
         val docName : TextView = view.findViewById(R.id.doc_page_name)
         val username : TextView = view.findViewById(R.id.doc_page_username)
-        pageTitle.setText(documento.nombre)
-        docName.setText(documento.nombre)
-        username.setText(prefs.getUsername())
+        pageTitle.text = documento.nombre
+        docName.text = documento.nombre
+        username.text = prefs.getUsername()
 
         val buttonRead : Button = view.findViewById(R.id.buttonReadDoc)
         val buttonDelete : Button = view.findViewById(R.id.buttonDeleteDocLibrary)

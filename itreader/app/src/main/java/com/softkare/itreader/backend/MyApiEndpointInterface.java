@@ -80,4 +80,7 @@ public interface MyApiEndpointInterface {
 
     @PUT("valorarLibro/{nombre}/")
     Call<Libro> valorarLibro(@Path("nombre") String nomLibro, @Body RequestBody body);
+
+    @DELETE("deleteLibro/{nomLibro}")
+    Call<ResponseBody> deleteLibro(@Path("nomLibro") String nomLibro);
 }

@@ -168,7 +168,7 @@ class BookVisualizer : Fragment() {
                         index + content.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                     content.text = spannableString
                 } else {
-                    Toast.makeText(requireContext(), "No hay ocurrencias", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.no_occurrences), Toast.LENGTH_SHORT).show()
                 }
             }
         }

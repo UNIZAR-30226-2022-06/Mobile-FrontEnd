@@ -4,55 +4,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment"
+    tools:context="fragments.SearchFragment"
     android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@drawable/degradado"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/degradado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/admin_btnUpload"
-            android:layout_width="89dp"
-            android:layout_height="66dp"
+            android:id="@+id/buttonUploadAdmin"
+            android:layout_width="95dp"
+            android:layout_height="68dp"
             android:src="@drawable/ic_baseline_cloud_upload_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TextViewSearch"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingStart="24dp"
+            android:paddingTop="20dp"
+            android:text="@string/menu_admin_control_panel"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/searchviewAdmin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <SearchView
+            android:id="@+id/searchviewAdmin"
+            android:layout_width="378dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="102dp"
+            android:background="@drawable/searchview_background"
+            android:queryHint="@string/menu_search"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:paddingStart="24dp"
-        android:paddingTop="20dp"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/menu_admin_control_panel"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_marginTop="180dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_recyclerCatalog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        tools:listitem="@layout/item_book"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCatalogAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_book" />
 
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

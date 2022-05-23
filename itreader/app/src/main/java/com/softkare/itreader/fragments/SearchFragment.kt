@@ -33,6 +33,7 @@ class SearchFragment : Fragment() {
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
         getList(recyclerView)
+        list = listOf()
         sublist = mutableListOf()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -75,24 +76,12 @@ class SearchFragment : Fragment() {
                 if(response.body() != null){
                     list = response.body()!!
                     recyclerView.adapter = bookAdapter(list)
-                }else{
-                    showAlert()
                 }
             }
 
             override fun onFailure(call: Call<List<Libro>>, t: Throwable) {
                 println("ERROR AL RECIBIR EL CATALOGO")
             }
-
         })
-    }
-
-    private fun showAlert() {
-        val builder = AlertDialog.Builder(mCtx)
-        builder.setTitle("Error")
-        builder.setMessage(getString(R.string.no_books))
-        builder.setPositiveButton("Ok",null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
     }
 }
