@@ -52,12 +52,12 @@ class BookVisualizer : Fragment() {
         content.text = "Aquí irá el contenido de la página recibida"
 
         arrowBack.setOnClickListener {
-            //TODO: Pasar a página anterior o, si es la primera, volver a BookPageFragment
+            //TODO: Pasar a página anterior o, si es la primera, volver a BookPageInLibraryFragment
             //pageNumber--
             val bundle = Bundle()
             bundle.putSerializable("book", book)
             val activity = view.context as AppCompatActivity
-            val transit = BookPageFragment()
+            val transit = BookPageInLibraryFragment()
             transit.arguments = bundle
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, transit)
@@ -208,7 +208,7 @@ class BookVisualizer : Fragment() {
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         //TODO: Llamar a servicio que devuelve la lista de marcadores
-        val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe")
+        val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe","Distorsión","Zopenco","Legislatura","Tragedia","Mequetrefe","Distorsión")
         recyclerView.adapter = bookmarkAdapter(list, requireContext())
     }
 }
