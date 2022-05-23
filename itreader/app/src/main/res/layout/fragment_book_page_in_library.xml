@@ -99,7 +99,8 @@
         android:id="@+id/buttonDeleteLibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/design_default_color_error"
         android:text="@string/book_page_delete"
         android:textColor="@color/white" />
