@@ -17,6 +17,7 @@ import com.softkare.itreader.backend.Usuario
 import com.softkare.itreader.sharedPreferences.Companion.prefs
 import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,8 +58,8 @@ class BookPageFragment : Fragment() {
             val buttonDelete = view.findViewById<Button>(R.id.buttonDeleteLibrary)
             val buttonRead = view.findViewById<Button>(R.id.buttonRead)
             buttonDelete.setOnClickListener {
-                service.deleteDocUser(prefs.getUsername(), book.nombre).enqueue(object : Callback<Usuario>{
-                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                service.deleteDocUsuario(prefs.getUsername(), book.nombre).enqueue(object : Callback<ResponseBody>{
+                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         val t = Toast.makeText(activity, "Book removed from library", Toast.LENGTH_SHORT)
                         t.show()
                         val activity = view.context as AppCompatActivity
@@ -70,7 +71,7 @@ class BookPageFragment : Fragment() {
                             .commit()
                     }
 
-                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         showAlertDelete()
                     }
                 })
