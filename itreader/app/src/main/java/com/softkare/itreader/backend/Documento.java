@@ -14,13 +14,15 @@ public class Documento implements Serializable {
     private String formato;
     @SerializedName("linkDocumento")
     private String linkDocumento;
+    @SerializedName("cover")
+    private String cover;
 
-
-    public Documento(Integer id, String nombre, String formato, String linkDocumento) {
+    public Documento(Integer id, String nombre, String formato, String linkDocumento, String cover) {
         this.id = id;
         this.nombre = nombre;
         this.formato = formato;
         this.linkDocumento = linkDocumento;
+        this.cover = cover;
     }
 
     public Integer getId() {
@@ -53,5 +55,13 @@ public class Documento implements Serializable {
 
     public void setLinkDocumento(String linkDocumento) {
         this.linkDocumento = linkDocumento;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 }

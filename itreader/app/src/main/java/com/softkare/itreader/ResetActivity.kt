@@ -28,7 +28,7 @@ class ResetActivity : AppCompatActivity()  {
         val email = findViewById<TextInputEditText>(R.id.email_reset)
         val button:Button = findViewById(R.id.button_reset)
 
-        var t = Toast.makeText(this, "Empty email", Toast.LENGTH_SHORT)
+        var t = Toast.makeText(this, getString(R.string.empty_email), Toast.LENGTH_SHORT)
 
         button.setOnClickListener{
             if(email.text.toString().isEmpty()){
@@ -74,7 +74,6 @@ class ResetActivity : AppCompatActivity()  {
             }
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 println("FALLO REGISTRO")
-                println("AQUI ESTOY : USUARIO REPETIDO2 EN FALLO")
             }
         })
     }
@@ -91,7 +90,7 @@ class ResetActivity : AppCompatActivity()  {
 
     private fun concatenaStrings(email: String):String {
         val builder = StringBuilder()
-        builder.append("The password has been sent to") /////////////////////IMPORTANTE
+        builder.append(getString(R.string.password_sent))
             .append(" ")
             .append(email)
         return builder.toString()
@@ -99,8 +98,8 @@ class ResetActivity : AppCompatActivity()  {
 
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Reset Password Error")
-        builder.setMessage("This email is not registered")
+        builder.setTitle(R.string.reset_password_error)
+        builder.setMessage(getString(R.string.email_not_registered))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()

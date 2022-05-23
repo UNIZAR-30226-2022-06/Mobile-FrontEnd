@@ -24,6 +24,12 @@ public class Usuario {
     private List<Libro> docsAnyadidos;
     @SerializedName("docsSubidos")
     private List<Documento> docsSubidos;
+    @SerializedName("letraSize")
+    private String letraSize;
+    @SerializedName("letraStyle")
+    private String letraStyle;
+    @SerializedName("colorFondo")
+    private String colorFondo;
 
     public Usuario(String nombre, String nomUsuario, String password, String correo, Boolean esAdmin) {
         this.nombre = nombre;
@@ -97,5 +103,29 @@ public class Usuario {
 
     public void setDocsSubidos(List<Documento> docsSubidos) {
         this.docsSubidos = docsSubidos;
+    }
+
+    public String getLetraSize() {
+        return letraSize;
+    }
+
+    public void setLetraSize(String letraSize) {
+        this.letraSize = letraSize;
+    }
+
+    public String getLetraStyle() {
+        return letraStyle;
+    }
+
+    public void setLetraStyle(String letraStyle) {
+        this.letraStyle = letraStyle;
+    }
+
+    public String getColorFondo() {
+        return colorFondo;
+    }
+
+    public void setColorFondo(String colorFondo) {
+        this.colorFondo = colorFondo;
     }
 }

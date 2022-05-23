@@ -46,8 +46,6 @@ class MyBooksFragment : Fragment() {
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,20 +53,19 @@ class MyBooksFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_my_books, container, false)
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerDocs)
         val buttonUpload : ImageButton = view.findViewById(R.id.btnUpload)
-        recyclerView.layoutManager= LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         getList(recyclerView)
         verifyStoragePermissions()
 
-        buttonUpload.setOnClickListener{
+        buttonUpload.setOnClickListener {
             verifyStoragePermissions()
 
             val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
             val mimeTypes = "PDF"
             intent.type = "application/pdf"
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(intent,102)
-
         }
         return view
     }
@@ -157,21 +154,17 @@ class MyBooksFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        // SE DEBE LLAMAR AL SERVICIO DE LOS DOCUMENTOS SUBIDOS POR EL USUARIO
         service.documentoUser(prefs.getUsername()).enqueue(object : Callback<List<Documento>> {
             override fun onResponse(call: Call<List<Documento>>, response: Response<List<Documento>>) {
                 if(response.body() != null){
                     list = response.body()!!
                     recyclerView.adapter = documentAdapter(list)
-                }else{
-                    showAlert()
                 }
             }
 
             override fun onFailure(call: Call<List<Documento>>, t: Throwable) {
                 println("ERROR AL RECIBIR LOS DOCUMENTOS DEL USUARIO")
             }
-
         })
     }
 
@@ -200,7 +193,4 @@ class MyBooksFragment : Fragment() {
         }
         return picturePath
     }
-
-
-
 }

@@ -11,7 +11,15 @@
     <string name="signup_error">Error en el registro</string>
     <string name="error_message">Ha ocurrido un error</string>
     <string name="empty_field">Usuario o contraseña vacío</string>
+    <string name="empty_email">Correo electrónico vacío</string>
+    <string name="loading">Cargando</string>
+    <string name="wait">Espere, por favor</string>
+    <string name="empty_fields">No has rellenado ningún campo</string>
+    <string name="no_data_to_change">No hay datos para modificar</string>
     <string name="user_mail_already_registered">Este usuario o correo ya está registrado</string>
+    <string name="invalid_data">Datos incorrectos</string>
+    <string name="been_registered">ha sido registrado</string>
+    <string name="been_deleted">ha sido eliminado</string>
     <string name="name">Nombre</string>
     <string name="forgotpass"><u>¿Has olvidado tu contraseña?</u></string>
     <string name="reset">Restablecer</string>
@@ -20,6 +28,9 @@
     <string name="menu_search">Buscar</string>
     <string name="menu_catalog">Catálogo</string>
     <string name="menu_profile">Perfil</string>
+    <string name="menu_admin_control_panel">Panel de Control del Administrador</string>
+    <string name="menu_edit">Modificar</string>
+    <string name="menu_delete">Eliminar</string>
     <string name="profile_label">Perfil de usuario</string>
     <string name="profile_name">Nombre:</string>
     <string name="profile_username">Nombre de usuario:</string>
@@ -38,8 +49,36 @@
     <string name="book_page_delete">Eliminar de tu biblioteca</string>
     <string name="alert_add_to_library">No se pudo añadir el libro a la bilioteca</string>
     <string name="alert_delete_to_library">No se pudo borrar el libro de la bilioteca</string>
-
-    <!-- TODO: Borrar o cambiar este texto de marcador de posición -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="book_added">Añadido a la biblioteca</string>
+    <string name="book_deleted">Eliminado de la biblioteca</string>
+    <string name="confirm">Confirmar</string>
+    <string name="confirm_changes">Confirmar cambios:</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="rating_made">Valoración realizada</string>
+    <string name="no_next_page">No hay página siguiente</string>
+    <string name="textsize_small">Texto pequeño</string>
+    <string name="textsize_medium">Texto mediano</string>
+    <string name="textsize_large">Texto grande</string>
+    <string name="textsize_very_large">Texto muy grande</string>
+    <string name="textcolor_blackonwhite">Negro sobre blanco</string>
+    <string name="textcolor_whiteonblack">Blanco sobre negro</string>
+    <string name="textcolor_warm">Colores cálidos</string>
+    <string name="textsearch_label">Buscar en el libro</string>
+    <string name="textstyle_alignStart">Alinear al inicio</string>
+    <string name="textstyle_alignCenter">Alinear al centro</string>
+    <string name="password_error">Error en la contraseña</string>
+    <string name="reset_password_error">Error al recuperar contraseña</string>
+    <string name="email_error">Error en el correo electrónico</string>
+    <string name="email_not_registered">Este correo electrónico no está registrado</string>
+    <string name="incorrect_email_format">Este formato de correo electrónico es incorrecto</string>
+    <string name="password_format">Formato correcto de la contraseña: 8 caracteres con, al menos, 1 mayúscula, 1 minúscula y 1 dígito</string>
+    <string name="password_sent">La contraseña se ha enviado a</string>
+    <string name="changes_saved">Cambios guardados</string>
+    <string name="no_occurrences">No hay ocurrencias</string>
+    <string name="delete_from_catalog">Libro eliminado del catálogo</string>
+    <string name="results">Resultados</string>
+    <string name="no_results">No hay resultados</string>
+    <string name="create_bm">Crear nuevo marcador</string>
+    <string name="list_all_bm">Listar todos los marcadores</string>
+    <string name="bookmark_list_label">Tus marcadores</string>
 </resources>

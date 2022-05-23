@@ -10,7 +10,15 @@
     <string name="signup_error">Sign up error</string>
     <string name="error_message">An error has occurred</string>
     <string name="empty_field">Empty username or password</string>
+    <string name="empty_email">Empty email</string>
+    <string name="loading">Loading</string>
+    <string name="wait">Please wait</string>
+    <string name="empty_fields">You do not have fill any field</string>
+    <string name="no_data_to_change">No data to change</string>
     <string name="user_mail_already_registered">This user or email is already registered</string>
+    <string name="invalid_data">Invalid Data</string>
+    <string name="been_registered">has been registered</string>
+    <string name="been_deleted">has been deleted</string>
     <string name="name">Name</string>
     <string name="forgotpass"><u>Forgot password</u></string>
     <string name="reset">Reset</string>
@@ -19,6 +27,9 @@
     <string name="menu_search">Search</string>
     <string name="menu_catalog">Catalog</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_admin_control_panel">Admin Control Panel</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
     <string name="profile_label">User Profile</string>
     <string name="profile_name">Name:</string>
     <string name="profile_username">Username:</string>
@@ -37,7 +48,36 @@
     <string name="book_page_delete">Delete from your library</string>
     <string name="alert_add_to_library">Could not add book from library</string>
     <string name="alert_delete_to_library">Could not delete book from library</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="book_added">Added to library</string>
+    <string name="book_deleted">Deleted from library</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_changes">Confirm changes:</string>
+    <string name="current_password">Current password</string>
+    <string name="rating_made">Rating made</string>
+    <string name="no_next_page">There is not next page</string>
+    <string name="textsize_small">Small text</string>
+    <string name="textsize_medium">Medium text</string>
+    <string name="textsize_large">Large text</string>
+    <string name="textsize_very_large">Very large text</string>
+    <string name="textcolor_blackonwhite">Black on white</string>
+    <string name="textcolor_whiteonblack">White on black</string>
+    <string name="textcolor_warm">Warm colors</string>
+    <string name="textsearch_label">Search in book</string>
+    <string name="textstyle_alignStart">Align to start</string>
+    <string name="textstyle_alignCenter">Align to center</string>
+    <string name="password_error">Password Error</string>
+    <string name="reset_password_error">Reset Password Error</string>
+    <string name="email_error">Email Error</string>
+    <string name="email_not_registered">This email is not registered</string>
+    <string name="incorrect_email_format">This email format is incorrect</string>
+    <string name="password_format">Password correct format: 8 characters with at least 1 uppercase and lowercase and 1 number</string>
+    <string name="password_sent">Password has been sent to</string>
+    <string name="changes_saved">Changes saved</string>
+    <string name="no_occurrences">No occurrences</string>
+    <string name="delete_from_catalog">Book deleted from catalog</string>
+    <string name="results">Results</string>
+    <string name="no_results">There are no results</string>
+    <string name="create_bm">Create new bookmark</string>
+    <string name="list_all_bm">List all bookmarks</string>
+    <string name="bookmark_list_label">Your bookmarks</string>
 </resources>

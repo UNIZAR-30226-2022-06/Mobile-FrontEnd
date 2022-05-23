@@ -87,11 +87,16 @@ public interface MyApiEndpointInterface {
     @GET("enviarCorreo/{correo}")
     Call<Usuario> enviarCorreo(@Path("correo")String correo);
 
+    @PUT("valorarLibro/{nombre}/")
+    Call<Libro> valorarLibro(@Path("nombre") String nomLibro, @Body RequestBody body);
+
+    @DELETE("deleteLibro/{nomLibro}")
+    Call<ResponseBody> deleteLibro(@Path("nomLibro") String nomLibro);
+
     @Multipart
     @POST("subirLibro/")
     Call<ResponseBody> subirLibro(@Part("usuario") RequestBody usuario, @Part MultipartBody.Part cover);
 
     @GET("leerLibro/{nombre}/{pagina}")
     Call<PaginaLibro> leerLibro(@Path("nombre") String nombre , @Path("pagina") Integer pagina);
-
 }

@@ -61,13 +61,13 @@ class ProfileFragment : Fragment() {
         var comprobarPass:Boolean = false
         var comprobarEmail:Boolean = false
 
-        var t = Toast.makeText(activity, "No has rellenado ningún campo", Toast.LENGTH_SHORT)
+        var t = Toast.makeText(activity, getString(R.string.empty_fields), Toast.LENGTH_SHORT)
 
         btn.setOnClickListener {
 
             if (email.text.isEmpty() && username.text.isEmpty() && newPass.text.isEmpty() && name.text.isEmpty()) {
                 t.cancel()
-                t = Toast.makeText(activity, "No data to change", Toast.LENGTH_SHORT)
+                t = Toast.makeText(activity, getString(R.string.no_data_to_change), Toast.LENGTH_SHORT)
                 t.show()
             } else {
                 t.cancel()
@@ -118,17 +118,16 @@ class ProfileFragment : Fragment() {
 
                     val cajaPassword = vista.findViewById<EditText>(R.id.password)
                     val btnConf: Button = vista.findViewById(R.id.btnConfirmar)
-                    var z = Toast.makeText(activity, "Incorrect Password", Toast.LENGTH_SHORT)
+                    var z = Toast.makeText(activity, getString(R.string.error_password), Toast.LENGTH_SHORT)
 
                     btnConf.setOnClickListener {
                         z.cancel()
                         if (cajaPassword.text.toString() == prefs.getPass()) {
-                            println("llego hasta aqui 1")
                             guardarCambios(nombre, nombreUsuario, correo, nuevaPass)
                             dialog.hide()
                         } else {
                             //z.cancel()
-                            z = Toast.makeText(activity, "Incorrect Password", Toast.LENGTH_SHORT)
+                            z = Toast.makeText(activity, getString(R.string.error_password), Toast.LENGTH_SHORT)
                             z.show()
                         }
                     }
@@ -151,16 +150,15 @@ class ProfileFragment : Fragment() {
 
             val cajaPassword = vista.findViewById<EditText>(R.id.password)
             val btnConf: Button = vista.findViewById(R.id.btnConfirmar)
-            var z = Toast.makeText(activity, "Incorrect Password", Toast.LENGTH_SHORT)
+            var z = Toast.makeText(activity, getString(R.string.error_password), Toast.LENGTH_SHORT)
 
             btnConf.setOnClickListener {
                 z.cancel()
                 if (cajaPassword.text.toString() == prefs.getPass()) {
-                    println("llego hasta aqui 1")
                     eliminarCuenta()
                     dialog.hide()
                 } else {
-                    z = Toast.makeText(activity, "Incorrect Password", Toast.LENGTH_SHORT)
+                    z = Toast.makeText(activity, getString(R.string.error_password), Toast.LENGTH_SHORT)
                     z.show()
                 }
             }
@@ -177,8 +175,8 @@ class ProfileFragment : Fragment() {
     private fun eliminarCuenta() {
 
         var progressDialog = ProgressDialog(activity)
-        progressDialog.setTitle("Loading")
-        progressDialog.setMessage("Please wait")
+        progressDialog.setTitle(R.string.loading)
+        progressDialog.setMessage(getString(R.string.wait))
         progressDialog.setCanceledOnTouchOutside(false)
         progressDialog.show()
 
@@ -192,7 +190,6 @@ class ProfileFragment : Fragment() {
         service.deleteUser(prefs.getUsername()).enqueue(object : Callback<ResponseBody> {
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                println("USUARIO BORRADO")
                 progressDialog.cancel()
                 goLogin2()
                 activity?.finish()
@@ -200,7 +197,6 @@ class ProfileFragment : Fragment() {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 progressDialog.cancel()
-                println("FALLO BORRADO")
             }
         })
     }
@@ -211,7 +207,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun goLogin2(){
-        Toast.makeText(activity, prefs.getUsername() + " has been deleted", Toast.LENGTH_LONG).show()
+        Toast.makeText(activity, prefs.getUsername() + " " + getString(R.string.been_deleted), Toast.LENGTH_LONG).show()
         val pantallaLogin = Intent(context, LoginActivity::class.java)
         startActivity(pantallaLogin)
     }
@@ -236,8 +232,8 @@ class ProfileFragment : Fragment() {
 
     private fun showAlert2(){
         val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("Password Error")
-        builder.setMessage("Password correct format: 8 characters with at least 1 uppercase and lowercase and 1 number")
+        builder.setTitle(R.string.password_error)
+        builder.setMessage(getString(R.string.password_format))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -245,8 +241,8 @@ class ProfileFragment : Fragment() {
 
     private fun showAlert1(){
         val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("Email Error")
-        builder.setMessage("This format email is incorrect")
+        builder.setTitle(R.string.email_error)
+        builder.setMessage(getString(R.string.incorrect_email_format))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -254,8 +250,8 @@ class ProfileFragment : Fragment() {
 
     private fun guardarCambios(name: String, username: String, email: String, newPass: String) {
         var progressDialog = ProgressDialog(activity)
-        progressDialog.setTitle("Loading")
-        progressDialog.setMessage("Wait please")
+        progressDialog.setTitle(R.string.loading)
+        progressDialog.setMessage(getString(R.string.wait))
         progressDialog.setCanceledOnTouchOutside(false)
         progressDialog.show()
         val MEDIA_TYPE_JSON: MediaType? = MediaType.parse("application/json; charset=utf-8")
@@ -276,7 +272,6 @@ class ProfileFragment : Fragment() {
         service.updateUser(prefs.getUsername(), body).enqueue(object :
             Callback<Usuario> {
             override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                println("USUARIO REGISTRADO")
                 if (response.body() != null) {
                     u = response.body()!!
                     prefs.saveEmail(u.correo)
@@ -284,7 +279,7 @@ class ProfileFragment : Fragment() {
                     prefs.saveName(u.nombre)
                     prefs.savePass(u.password)
                     progressDialog.cancel()
-                    Toast.makeText(activity, "Changes saved", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, getString(R.string.changes_saved), Toast.LENGTH_LONG).show()
                     goProfile()
                 } else {
                     progressDialog.cancel()
@@ -294,7 +289,6 @@ class ProfileFragment : Fragment() {
 
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 progressDialog.cancel()
-                println("FALLO REGISTRO")
             }
         })
     }
@@ -302,7 +296,7 @@ class ProfileFragment : Fragment() {
     private fun showAlert(){
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Error")
-        builder.setMessage("This username or email already exists")
+        builder.setMessage(getString(R.string.user_mail_already_registered))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()

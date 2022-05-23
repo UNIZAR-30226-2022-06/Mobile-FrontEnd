@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sans_serif"
+        android:title="Sans-Serif"
+        android:fontFamily="sans-serif" />
+    <item
+        android:id="@+id/monospace"
+        android:title="Monospace"
+        android:fontFamily="monospace"/>
+    <item
+        android:id="@+id/serif"
+        android:title="Serif"
+        android:fontFamily="serif"/>
+    <item
+        android:id="@+id/align_start"
+        android:title="@string/textstyle_alignStart" />
+    <item
+        android:id="@+id/align_center"
+        android:title="@string/textstyle_alignCenter" />
+</menu>

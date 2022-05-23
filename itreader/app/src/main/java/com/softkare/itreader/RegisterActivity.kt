@@ -31,12 +31,12 @@ class RegisterActivity : AppCompatActivity() {
         val password = findViewById<TextInputEditText>(R.id.password_usuario)
         val validar: Button = findViewById(R.id.btnValUsuario)
 
-        var t = Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+        var t = Toast.makeText(this, getString(R.string.error_message), Toast.LENGTH_SHORT)
 
         validar.setOnClickListener {
             if(email.text?.isEmpty() == true || username.text?.isEmpty() == true || password.text?.isEmpty() == true || name.text?.isEmpty() == true) {
                 t.cancel()
-                t = Toast.makeText(this, "Invalid Data", Toast.LENGTH_SHORT)
+                t = Toast.makeText(this, getString(R.string.invalid_data), Toast.LENGTH_SHORT)
                 t.show()
             }else if(!checkPass(password.text.toString())) {
                 showAlertPassword()
@@ -82,7 +82,6 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                 println("FALLO REGISTRO")
-                println("AQUI ESTOY : USUARIO REPETIDO2 EN FALLO")
             }
         })
     }
@@ -95,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
         val builder = StringBuilder()
         builder.append(username)
             .append(" ")
-            .append("has been registered")
+            .append(getString(R.string.been_registered))
         return builder.toString()
     }
 
@@ -106,8 +105,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Sign Up Error")
-        builder.setMessage("This user or email is already registered")
+        builder.setTitle(R.string.signup_error)
+        builder.setMessage(getString(R.string.user_mail_already_registered))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -133,8 +132,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showAlertPassword(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Password Error")
-        builder.setMessage("Password correct format: 8 characters with at least 1 uppercase and lowercase and 1 number")
+        builder.setTitle(getString(R.string.password_error))
+        builder.setMessage(getString(R.string.password_format))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -142,8 +141,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showAlertEmail(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Email Error")
-        builder.setMessage("This format email is incorrect")
+        builder.setTitle(getString(R.string.email_error))
+        builder.setMessage(getString(R.string.incorrect_email_format))
         builder.setPositiveButton("Ok",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
