@@ -56,7 +56,8 @@
                 android:text="@string/charge"
                 android:textColor="@color/white"
                 android:textSize="16dp"
-                android:backgroundTint="@color/GREENBACK"/>
+                android:backgroundTint="@color/GREENBACK"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

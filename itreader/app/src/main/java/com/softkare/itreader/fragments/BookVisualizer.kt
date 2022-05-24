@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
 import com.softkare.itreader.adapter.bookmarkAdapter
 import com.softkare.itreader.backend.Libro
+import com.softkare.itreader.backend.Marca
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import com.softkare.itreader.backend.PaginaLibro
 import com.softkare.itreader.sharedPreferences.Companion.prefs
@@ -65,7 +66,8 @@ class BookVisualizer : Fragment() {
 
         // CONSULTAR EL MARCAPÁGINAS, SI EXISTE
         // pageNumber = marcapaginas
-        chargePage()
+        getPage()
+        //chargePage()
 
         arrowBack.setOnClickListener {
             if (pageNumber == 1) {
@@ -92,6 +94,27 @@ class BookVisualizer : Fragment() {
 
         arrowForward.setOnClickListener {
             pageNumber++
+            val retrofit = Retrofit.Builder()
+                .baseUrl(MyApiEndpointInterface.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            val J = JSONObject()
+            J.put("pagina", pageNumber)
+            val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
+            val service = retrofit.create(MyApiEndpointInterface::class.java)
+            service.updateMarcaAndroid(prefs.getUsername(), book.nombre, body).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.body() != null) {
+                        println("MARCADOR ACTUALIZADO")
+                    } else {
+                        println("MARCADOR NO ACTUALIZADO")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    println("ERROR AL RECIBIR LA PÁGINA DEL LIBRO")
+                }
+            })
             chargePage()
         }
 
@@ -239,6 +262,35 @@ class BookVisualizer : Fragment() {
         return view
     }
 
+
+
+    private fun getPage(){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(MyApiEndpointInterface.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        println(book.nombre)
+        val service = retrofit.create(MyApiEndpointInterface::class.java)
+        service.MarcaPaginas(prefs.getUsername(), book.nombre).enqueue(object : Callback<List<Marca>> {
+            override fun onResponse(call: Call<List<Marca>>, response: Response<List<Marca>>) {
+                if (response.body() != null) {
+                    var marcador  = response.body()!!
+                    pageNumber = marcador[0].pagina
+                    chargePage()
+                    println(pageNumber)
+                } else {
+                    println("PAGINA VACIA")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Marca>>, t: Throwable) {
+                println("ERROR AL RECIBIR LA PÁGINA DEL LIBRO")
+            }
+        })
+    }
+
+
+
     private fun chargePage() {
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -250,6 +302,7 @@ class BookVisualizer : Fragment() {
                 if (response.body() != null) {
                     page = response.body()!!
                     pageNumber = page.pagina
+                    //TODO ACTUALIZAR MARCADOR GENERAL
                     content.text = page.contenido
                 } else {
                     println("PAGINA VACIA")
@@ -268,17 +321,32 @@ class BookVisualizer : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        //TODO: Llamar a servicio que devuelve la lista de marcadores
-        val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe","Distorsión","Zopenco","Legislatura","Tragedia","Mequetrefe","Distorsión")
-        recyclerView.adapter = bookmarkAdapter(list, requireContext())
+        service.marcasUsuarioLibro(prefs.getUsername(),book.nombre).enqueue(object : Callback<List<Marca>> {
+            override fun onResponse(call: Call<List<Marca>>, response: Response<List<Marca>>) {
+                if(response.body() != null){
+                    var list = response.body()!!
+                    recyclerView.adapter = bookmarkAdapter(list, requireContext())
+                }else{
+                    println("MARCAS NO DEVUELTAS")
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marca>>, t: Throwable) {
+                println("ERROR AL LISTAR LA MARCA")
+            }
+        })
+        //val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe","Distorsión","Zopenco","Legislatura","Tragedia","Mequetrefe","Distorsión")
+        //recyclerView.adapter = bookmarkAdapter(list, requireContext())
     }
 
     private fun createBookmark() {
         val J = JSONObject()
         J.put("usuario", prefs.getUsername())
         J.put("libro", book.nombre)
-        J.put("nombre", "Nueva marca")
+        J.put("nombre", "MARCADÑÑ")
         J.put("pagina", pageNumber)
+        J.put("esUlt", 0)
         val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -287,7 +355,12 @@ class BookVisualizer : Fragment() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
         service.createMarca(body).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                println("MARCA CREADA")
+                if(response.body() != null){
+                    println("MARCA CREADA")
+                }else{
+                    println("MARCA NO CREADA")
+                }
+
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -296,4 +369,5 @@ class BookVisualizer : Fragment() {
         })
 
     }
+
 }

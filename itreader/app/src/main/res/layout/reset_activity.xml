@@ -86,6 +86,7 @@
                     android:drawableStart="@drawable/ic_baseline_email_24"
                     android:drawablePadding="6dp"
                     android:hint="Email"
+                    android:maxLength="50"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp" />
             </com.google.android.material.textfield.TextInputLayout>
