@@ -23,6 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BookVisualizer : Fragment() {
+    private val contenidoEjemplo = "Aquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibida"
     private var style = 1
     private var pageNumber = 1
     private val textSmallSize = 12F
@@ -30,7 +31,6 @@ class BookVisualizer : Fragment() {
     private val textLargeSize = 24F
     private val textVeryLargeSize = 36F
     lateinit var content : TextView
-    lateinit var mSpannableString: SpannableString
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,8 +51,7 @@ class BookVisualizer : Fragment() {
         val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
         content.textSize = textMediumSize
         content.movementMethod = ScrollingMovementMethod.getInstance()
-        content.text = "Aquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibida"
-        mSpannableString = SpannableString(content.text)
+        content.text = contenidoEjemplo
 
         arrowBack.setOnClickListener {
             //TODO: Pasar a página anterior o, si es la primera, volver a BookPageInLibraryFragment
@@ -124,8 +123,8 @@ class BookVisualizer : Fragment() {
             val buttonConfirmSearch: Button = vista.findViewById(R.id.buttonConfirmSearch)
             buttonConfirmSearch.setOnClickListener {
                 dialog?.hide()
-                resetSearchVisualizer()
-                mSpannableString = SpannableString(content.text)
+                content.text = contenidoEjemplo
+                val mSpannableString = SpannableString(content.text)
                 var index = content.text.indexOf(searchText.text.toString(), 0, true)
                 if (index >= 0) {
                     var nFound = 1
@@ -190,19 +189,6 @@ class BookVisualizer : Fragment() {
         }
 
         return view
-    }
-
-    private fun resetSearchVisualizer() {
-        val spannableString = SpannableString(content.text)
-        when (style) {
-            1 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.white)),
-                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            2 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.black)),
-                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            3 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.light_orange)),
-                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        content.text = spannableString
     }
 
     private fun getBookmarkList(recyclerView: RecyclerView) {

@@ -84,4 +84,5 @@
     <string name="search_by_title">Search by title</string>
     <string name="search_by_author">Search by author</string>
     <string name="search_by_editorial">Search by editorial</string>
+    <string name="charge">Charge more</string>
 </resources>

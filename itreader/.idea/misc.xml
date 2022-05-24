@@ -50,7 +50,7 @@
         <entry key="app/src/main/res/layout/fragment_library.xml" value="0.17271078875793291" />
         <entry key="app/src/main/res/layout/fragment_my_books.xml" value="0.17951042611060744" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17271078875793291" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.14233907524932005" />
         <entry key="app/src/main/res/layout/item_book_admin.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.2013681060282172" />

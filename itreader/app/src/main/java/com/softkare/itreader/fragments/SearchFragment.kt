@@ -125,7 +125,7 @@ class SearchFragment : Fragment() {
                     recyclerView.adapter = bookAdapter(list)
                 }else{
                     Toast.makeText(requireContext(), "No hay más libros que mostrar", Toast.LENGTH_SHORT).show()
-                    btn.setVisibility(View.GONE);
+                    btn.visibility = View.GONE;
                 }
             }
 

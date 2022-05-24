@@ -49,10 +49,10 @@
 
         <Button
             android:id="@+id/buttonReset"
-            android:layout_width="75dp"
-            android:layout_height="38dp"
+            android:layout_width="88dp"
+            android:layout_height="39dp"
             android:backgroundTint="@color/GREENBACK"
-            android:text="Reset"
+            android:text="@string/reset"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/searchview"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,10 @@
                 android:id="@+id/cargar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cargar"/>
+                android:text="@string/charge"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:backgroundTint="@color/GREENBACK"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
