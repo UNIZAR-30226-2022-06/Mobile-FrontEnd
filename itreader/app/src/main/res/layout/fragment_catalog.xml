@@ -38,20 +38,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:padding="4dp"
+            android:id="@+id/linear">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerBooks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_book"/>
+                tools:listitem="@layout/item_book" />
 
-
-            <ProgressBar
+            <Button
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Cargar"/>
 
         </LinearLayout>
 
