@@ -78,10 +78,7 @@ class MyBooksFragment : Fragment() {
             // the user selected.
             var uri = resultData?.data
             var path = getRealPathFromUri(requireContext(),uri)
-            println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            println(path)
             val file = File(path)
-            println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
             Toast.makeText(requireContext(), "La ruta "+path+" no es accesible en este dispositivo", Toast.LENGTH_SHORT).show()
             //upload(file,uri)
         }

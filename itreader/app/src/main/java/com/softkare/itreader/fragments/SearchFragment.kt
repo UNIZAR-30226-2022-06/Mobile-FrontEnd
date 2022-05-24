@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
@@ -27,6 +25,7 @@ class SearchFragment : Fragment() {
     lateinit var sublist : MutableList<Libro>
     lateinit var sublist2 : MutableList<Libro>
     var page = 1
+    var searchType = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,17 +33,56 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         val searchView : SearchView = view.findViewById(R.id.searchview)
         val btn : Button = view.findViewById(R.id.cargar)
+        val btnReset : Button = view.findViewById(R.id.buttonReset)
+        val btnFilter : ImageView = view.findViewById(R.id.btnFilter)
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
         list = listOf()
         sublist = mutableListOf()
         sublist2 = mutableListOf()
         page = 1
+        searchType = 0
         getList(recyclerView,btn,view)
-        btn.setOnClickListener{
+
+        btn.setOnClickListener {
             page++
             getList(recyclerView, btn, view)
+            searchView.setQuery("",false)
             searchView.clearFocus()
+        }
+
+        btnReset.setOnClickListener {
+            searchView.setQuery("",false)
+            searchView.clearFocus()
+            btn.visibility = View.VISIBLE
+            sublist = mutableListOf()
+            sublist2 = mutableListOf()
+            page = 1
+            getList(recyclerView, btn, view)
+        }
+
+        btnFilter.setOnClickListener {
+            val popupMenu = PopupMenu(requireContext(), btnFilter)
+            popupMenu.menuInflater.inflate(R.menu.menu_search, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.search_by_title -> {
+                        searchType = 0
+                        searchView.queryHint = getString(R.string.search_by_title)
+                    }
+                    R.id.search_by_author -> {
+                        searchType = 1
+                        searchView.queryHint = getString(R.string.search_by_author)
+                    }
+
+                    R.id.search_by_editorial -> {
+                        searchType = 2
+                        searchView.queryHint = getString(R.string.search_by_editorial)
+                    }
+                }
+                true
+            }
+            popupMenu.show()
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -53,11 +91,16 @@ class SearchFragment : Fragment() {
                 searchView.clearFocus()
                 sublist.clear()
                 for (b in list) {
-                    if (b.nombre.lowercase().contains(p0.toString().lowercase())) {
+                    if (searchType == 0 && b.nombre.lowercase().contains(p0.toString().lowercase())) {
+                        sublist.add(b)
+                    } else if (searchType == 1 && b.autor.lowercase().contains(p0.toString().lowercase())) {
+                        sublist.add(b)
+                    } else if (searchType == 2 && b.editorial.lowercase().contains(p0.toString().lowercase())) {
                         sublist.add(b)
                     }
                 }
                 recyclerView.adapter = bookAdapter(sublist)
+                btn.visibility = View.GONE
                 return false
             }
 
@@ -82,7 +125,7 @@ class SearchFragment : Fragment() {
                     recyclerView.adapter = bookAdapter(list)
                 }else{
                     Toast.makeText(requireContext(), "No hay más libros que mostrar", Toast.LENGTH_SHORT).show()
-                    btn.setVisibility(View.GONE);
+                    btn.visibility = View.GONE;
                 }
             }
 

@@ -11,12 +11,13 @@
         android:background="@color/white"/>
 
     <TextView
+        android:id="@+id/search_visualizer_label"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/BLUEBACK"
         android:layout_marginLeft="4dp"
         android:textStyle="bold"
-        android:text="@string/textsearch_label"
+        android:text="@string/textsearch_label_word"
         android:textSize="20dp"/>
 
     <EditText

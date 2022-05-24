@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -31,24 +32,24 @@
             android:layout_width="59dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginLeft="8dp"
             app:layout_constraintEnd_toStartOf="@+id/buttonSize"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:tint="@color/BLUEBACK" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/arrow_forward"
             android:layout_width="59dp"
             android:layout_height="70dp"
+            android:layout_marginRight="8dp"
             android:src="@drawable/ic_baseline_arrow_forward_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView7"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonFont"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:tint="@color/BLUEBACK" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/buttonSize"
@@ -59,8 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.189"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            tools:tint="@color/GREENBACK" />
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <ImageView
             android:id="@+id/buttonColor"
@@ -72,8 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonSize"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            tools:tint="@color/GREENBACK" />
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <ImageView
             android:id="@+id/buttonSearch"
@@ -85,8 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonColor"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            tools:tint="@color/GREENBACK" />
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <ImageView
             android:id="@+id/buttonBookmark"
@@ -98,8 +96,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonSearch"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            tools:tint="@color/GREENBACK" />
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <ImageView
             android:id="@+id/buttonFont"
@@ -111,8 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/buttonBookmark"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            tools:tint="@color/GREENBACK" />
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,7 +133,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="4dp"
             android:scrollbars="vertical"
-            android:textColor="@color/BLUEBACK" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

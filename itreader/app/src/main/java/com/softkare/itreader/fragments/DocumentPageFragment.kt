@@ -15,7 +15,10 @@ import com.softkare.itreader.backend.Documento
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import com.softkare.itreader.backend.PaginaLibro
 import com.softkare.itreader.sharedPreferences.Companion.prefs
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,8 +74,10 @@ class DocumentPageFragment : Fragment() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val service = retrofit.create(MyApiEndpointInterface::class.java)
-            println(documento.nombre+".pdf")
-            service.deleteDocUsuario(prefs.getUsername() ,documento.nombre).enqueue(object : Callback<ResponseBody> {
+            val J = JSONObject()
+            J.put("nomLibro", documento.nombre)
+            val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
+            service.deleteDocUsuario(prefs.getUsername(), body).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     Toast.makeText(requireContext(),getString(R.string.deleted_doc), Toast.LENGTH_SHORT).show()
                     volver()

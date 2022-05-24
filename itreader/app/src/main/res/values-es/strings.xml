@@ -63,7 +63,8 @@
     <string name="textcolor_blackonwhite">Negro sobre blanco</string>
     <string name="textcolor_whiteonblack">Blanco sobre negro</string>
     <string name="textcolor_warm">Colores cálidos</string>
-    <string name="textsearch_label">Buscar en el libro</string>
+    <string name="textsearch_label_word">Buscar palabra en la página</string>
+    <string name="textsearch_label_page">Buscar página en el libro</string>
     <string name="textstyle_alignStart">Alinear al inicio</string>
     <string name="textstyle_alignCenter">Alinear al centro</string>
     <string name="password_error">Error en la contraseña</string>
@@ -82,4 +83,10 @@
     <string name="list_all_bm">Listar todos los marcadores</string>
     <string name="bookmark_list_label">Tus marcadores</string>
     <string name="deleted_doc">Documento borrado</string>
+    <string name="search_by_title">Buscar por título</string>
+    <string name="search_by_author">Buscar por autor</string>
+    <string name="search_by_editorial">Buscar por editorial</string>
+    <string name="charge">Cargar más</string>
+    <string name="search_word">Buscar palabra</string>
+    <string name="search_page">Buscar página</string>
 </resources>
