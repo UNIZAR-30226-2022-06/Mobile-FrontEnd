@@ -17,12 +17,19 @@ public class Marca {
     @SerializedName("pagina")
     @Expose
     private Integer pagina;
+    @SerializedName("esUltimaLeida")
+    @Expose
+    private Boolean esUltimaLeida;
+    @SerializedName("esUlt")
+    @Expose
+    private Integer esUlt;
 
-    public Marca(String usuario, String libro, String nombre, Integer pagina) {
+    public Marca(String usuario, String libro, String nombre, Integer pagina, Integer esUlt) {
         this.usuario = usuario;
         this.libro = libro;
         this.nombre = nombre;
         this.pagina = pagina;
+        this.esUlt = esUlt;
     }
 
     public String getUsuario() {
@@ -56,4 +63,21 @@ public class Marca {
     public void setPagina(Integer pagina) {
         this.pagina = pagina;
     }
+
+    public Boolean getEsUltimaLeida() {
+        return  esUltimaLeida;
+    }
+
+    public void setEsUltimaLeida(Boolean esUltimaLeida) {
+        this.esUltimaLeida = esUltimaLeida;
+    }
+
+    public Integer getEsUlt() {
+        return  esUlt;
+    }
+
+    public void setEsUlt(Integer esUlt) {
+        this.esUlt = esUlt;
+    }
+
 }

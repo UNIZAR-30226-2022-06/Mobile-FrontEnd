@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.softkare.itreader.R
 import com.softkare.itreader.backend.Libro
 import com.softkare.itreader.backend.MyApiEndpointInterface
+import com.softkare.itreader.backend.Usuario
 import com.softkare.itreader.sharedPreferences
+import com.softkare.itreader.sharedPreferences.Companion.prefs
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -43,14 +45,24 @@ class BookPageInLibraryFragment : Fragment() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
 
         buttonShare.setOnClickListener {
-            //TODO: Añadir servicio para compartir libro
+            //TODO PEDIR EL EMAIL
+            val email = "hectorrute98gp@gmail.com"
+            service.compartirLibro(prefs.getUsername(), book.nombre, email).enqueue(object : Callback<Usuario> {
+                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                    Toast.makeText(activity, book.nombre+" ha sido compartido", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    showAlertDelete()
+                }
+            })
         }
 
         buttonDelete.setOnClickListener {
             val J = JSONObject()
             J.put("nomLibro", book.nombre)
             val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
-            service.deleteLibroUsuario(sharedPreferences.prefs.getUsername(), body).enqueue(object : Callback<ResponseBody> {
+            service.deleteLibroUsuario(prefs.getUsername(), body).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     Toast.makeText(activity, getString(R.string.book_deleted), Toast.LENGTH_SHORT).show()
                     val activity = view.context as AppCompatActivity

@@ -105,4 +105,21 @@ public interface MyApiEndpointInterface {
 
     @POST("createMarca/")
     Call<ResponseBody> createMarca(@Body RequestBody body);
+
+    @GET("MarcasUsuarioLibro/{nomUsuario}/{nomLibro}/")
+    Call<List<Marca>> marcasUsuarioLibro(@Path("nomUsuario") String nomUsuario, @Path("nomLibro") String nomLibro);
+
+    @DELETE("deleteMarca/{nomUsuario}/{idLibro}/{nomMarca}/")
+    Call<ResponseBody> deleteMarca(@Path("nomUsuario") String nomUsuario,@Path("idLibro") Integer idLibro,@Path("nomMarca") String nomMarca );
+
+    @PUT("updateMarcaAndroid/{nomUsuario}/{nomLibro}/")
+    Call<ResponseBody> updateMarcaAndroid(@Path("nomUsuario") String nomUsuario,@Path("nomLibro") String nomLibro,@Body RequestBody body);
+
+    @GET("MarcaPaginas/{nomUsuario}/{nomLibro}/")
+    Call<List<Marca>> MarcaPaginas(@Path("nomUsuario") String nomUsuario,@Path("nomLibro") String nomLibro);
+
+    @GET("compartirLibro/{nomUsuario}/{nomLibro}/{email}/")
+    Call<Usuario> compartirLibro(@Path("nomUsuario")String nomUsuario,@Path("nomLibro")String nomLibro,@Path("email")String email );
+
+
 }

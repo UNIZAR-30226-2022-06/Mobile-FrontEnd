@@ -80,7 +80,8 @@ class MyBooksFragment : Fragment() {
             var path = getRealPathFromUri(requireContext(),uri)
             val file = File(path)
             Toast.makeText(requireContext(), "La ruta "+path+" no es accesible en este dispositivo", Toast.LENGTH_SHORT).show()
-            //upload(file,uri)
+            upload(file,uri)
+
         }
     }
 
@@ -115,7 +116,7 @@ class MyBooksFragment : Fragment() {
     }
 
     private fun upload(file: File,fileUri: Uri?) {
-        var reqUsuario = RequestBody.create(MediaType.parse("text/plain"), prefs.getUsername())
+        var reqUsuario = RequestBody.create(MediaType.parse("text/plain"),prefs.getUsername())
         var reqFile = RequestBody.create(MediaType.parse(context?.contentResolver?.getType(fileUri!!)), file)
         val multipartFile = MultipartBody.Part.createFormData("file", file.name, reqFile)
 
@@ -132,7 +133,7 @@ class MyBooksFragment : Fragment() {
                 if(response.body() != null){
                     println("LIBRO SUBIDO")
                 }else{
-                    showAlert()
+                    println("ERROR")
                 }
             }
 
