@@ -88,4 +88,12 @@
     <string name="charge">Charge more</string>
     <string name="search_word">Search word</string>
     <string name="search_page">Search page</string>
+    <string name="bookmark_create">Name your bookmark</string>
+    <string name="bookmark_created">Bookmark created</string>
+    <string name="error_bookmark_name">There is already a bookmark with this name</string>
+    <string name="error_bookmark_page">There is already a bookmark in this page</string>
+    <string name="page">Page</string>
+    <string name="end_of_book">End of book has been reached</string>
+    <string name="shared_label">Insert email to share</string>
+    <string name="empty_library">You still don\'t have books in your library, You can add as books from our catalog as you wish</string>
 </resources>

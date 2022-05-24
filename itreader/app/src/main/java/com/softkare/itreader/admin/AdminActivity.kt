@@ -6,19 +6,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.media.ImageWriter
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.softkare.itreader.LoginActivity
 import com.softkare.itreader.R
+import com.softkare.itreader.adapter.bookAdapter
 import com.softkare.itreader.adapter.catalogAdapter
 import com.softkare.itreader.backend.Libro
 import com.softkare.itreader.backend.ListaLibros
@@ -37,10 +38,7 @@ import java.io.File
 
 class AdminActivity : AppCompatActivity() {
     lateinit var list : List<Libro>
-    lateinit var list2 : ListaLibros
     lateinit var sublist : MutableList<Libro>
-    lateinit var sublist2 : MutableList<Libro>
-    var page = 1
     private val REQUEST_EXTERNAL_STORAGE = 1
     private val PERMISSIONS_STORAGE = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -52,29 +50,17 @@ class AdminActivity : AppCompatActivity() {
         val buttonUpload : ImageButton = findViewById(R.id.btnUploadAdmin)
         val mRecyclerView : RecyclerView = findViewById(R.id.recyclerCatalogAdmin)
         val searchView : SearchView = findViewById(R.id.searchviewAdmin)
-        val btnCharge : Button = findViewById(R.id.cargar)
-        val btnReset : Button = findViewById(R.id.buttonReset)
+        val signout : ImageView = findViewById(R.id.signout)
 
-        getCatalog(mRecyclerView, btnCharge)
         list = listOf()
         sublist = mutableListOf()
-        sublist2 = mutableListOf()
+        mRecyclerView.layoutManager = LinearLayoutManager(this)
+        getCatalog(mRecyclerView)
 
-        btnCharge.setOnClickListener {
-            page++
-            getCatalog(mRecyclerView, btnCharge)
-            searchView.setQuery("",false)
-            searchView.clearFocus()
-        }
-
-        btnReset.setOnClickListener {
-            searchView.setQuery("",false)
-            searchView.clearFocus()
-            btnCharge.visibility = View.VISIBLE
-            sublist = mutableListOf()
-            sublist2 = mutableListOf()
-            page = 1
-            getCatalog(mRecyclerView, btnCharge)
+        signout.setOnClickListener {
+            val pantallaLogin = Intent(this, LoginActivity::class.java)
+            startActivity(pantallaLogin)
+            finish()
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -86,7 +72,6 @@ class AdminActivity : AppCompatActivity() {
                         sublist.add(b)
                     }
                     mRecyclerView.adapter = catalogAdapter(sublist, this@AdminActivity)
-                    btnCharge.visibility = View.GONE
                 }
                 return false
             }
@@ -107,27 +92,24 @@ class AdminActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCatalog(recyclerView: RecyclerView, btn : Button) {
+    private fun getCatalog(recyclerView: RecyclerView) {
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        service.libroList(page).enqueue(object : Callback<ListaLibros> {
-            override fun onResponse(call: Call<ListaLibros>, response: Response<ListaLibros>) {
-                if(response.body() != null) {
-                    list2 = response.body()!!
-                    sublist2.addAll(list2.results)
-                    list = sublist2
+        service.libros().enqueue(object : Callback<List<Libro>> {
+            override fun onResponse(call: Call<List<Libro>>, response: Response<List<Libro>>) {
+                if(response.body() != null){
+                    list = response.body()!!
                     recyclerView.adapter = catalogAdapter(list, this@AdminActivity)
                 } else {
-                    Toast.makeText(this@AdminActivity, "No hay más libros que mostrar", Toast.LENGTH_SHORT).show()
-                    btn.visibility = View.GONE
+                    Toast.makeText(this@AdminActivity, "ERROR", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<ListaLibros>, t: Throwable) {
-                println("ERROR AL RECIBIR EL CATÁLOGO DE LIBROS")
+            override fun onFailure(call: Call<List<Libro>>, t: Throwable) {
+                println("ERROR AL RECIBIR EL CATALOGO")
             }
         })
     }
@@ -139,7 +121,7 @@ class AdminActivity : AppCompatActivity() {
             // The result data contains a URI for the document or directory that
             // the user selected.
             var uri = resultData?.data
-            var path = getRealPathFromUri(this,uri)
+            var path = getRealPathFromUri(this, uri)
             val file = File(path)
             Toast.makeText(this, "La ruta "+path+" no es accesible en este dispositivo", Toast.LENGTH_SHORT).show()
             //upload(file,uri)

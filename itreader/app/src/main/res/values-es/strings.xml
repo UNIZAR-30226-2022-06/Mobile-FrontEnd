@@ -89,4 +89,13 @@
     <string name="charge">Cargar más</string>
     <string name="search_word">Buscar palabra</string>
     <string name="search_page">Buscar página</string>
+    <string name="bookmark_create">Nombra tu marcador</string>
+    <string name="bookmark_created">Marcador creado</string>
+    <string name="error_bookmark_name">Ya existe una marca con este nombre</string>
+    <string name="error_bookmark_page">Ya existe una marca en esta página</string>
+    <string name="page">Página</string>
+    <string name="end_of_book">Se ha llegado al final del libro</string>
+    <string name="shared_label">Insertar correo electrónico para compartir</string>
+    <string name="empty_library">Todavía no tienes libros en tu biblioteca, puedes añadir tantos libros del catálogo como desees</string>
+
 </resources>

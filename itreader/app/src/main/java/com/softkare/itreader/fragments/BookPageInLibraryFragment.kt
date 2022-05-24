@@ -45,17 +45,28 @@ class BookPageInLibraryFragment : Fragment() {
         val service = retrofit.create(MyApiEndpointInterface::class.java)
 
         buttonShare.setOnClickListener {
-            //TODO PEDIR EL EMAIL
-            val email = "hectorrute98gp@gmail.com"
-            service.compartirLibro(prefs.getUsername(), book.nombre, email).enqueue(object : Callback<Usuario> {
-                override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                    Toast.makeText(activity, book.nombre+" ha sido compartido", Toast.LENGTH_SHORT).show()
-                }
+            val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
+            val vista = layoutInflater.inflate(R.layout.dialog_textsearch, null)
+            val mail : EditText = vista.findViewById(R.id.searchEditText)
+            val button : Button = vista.findViewById(R.id.buttonConfirmSearch)
+            val label : TextView = vista.findViewById(R.id.search_visualizer_label)
+            label.text = getString(R.string.shared_label)
+            builder?.setView(vista)
+            val dialog = builder?.create()
+            dialog?.show()
+            button.setOnClickListener {
+                dialog?.hide()
+                val email = mail.text.toString()
+                service.compartirLibro(prefs.getUsername(), book.nombre, email).enqueue(object : Callback<Usuario> {
+                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                        Toast.makeText(activity, book.nombre+" ha sido compartido con "+email, Toast.LENGTH_SHORT).show()
+                    }
 
-                override fun onFailure(call: Call<Usuario>, t: Throwable) {
-                    showAlertDelete()
-                }
-            })
+                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                        showAlertDelete()
+                    }
+                })
+            }
         }
 
         buttonDelete.setOnClickListener {

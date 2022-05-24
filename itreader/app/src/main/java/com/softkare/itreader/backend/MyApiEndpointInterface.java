@@ -84,6 +84,9 @@ public interface MyApiEndpointInterface {
     @GET("LibrosPage/")
     Call<ListaLibros> libroList(@Query("page") Integer pagina);
 
+    @GET("Libros/")
+    Call<List<Libro>> libros();
+
     @GET("UsuariosCorreo/{correo}")
     Call<Usuario> checkUser(@Path("correo")String correo);
 
