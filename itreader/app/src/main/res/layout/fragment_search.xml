@@ -51,6 +51,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -71,6 +73,12 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_book" />
+
+            <Button
+                android:id="@+id/cargar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cargar"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

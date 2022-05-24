@@ -49,10 +49,11 @@
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_book" />
 
-            <ProgressBar
+            <Button
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Cargar"/>
 
         </LinearLayout>
 

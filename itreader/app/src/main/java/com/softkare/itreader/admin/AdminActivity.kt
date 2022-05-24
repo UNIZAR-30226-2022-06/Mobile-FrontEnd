@@ -11,6 +11,7 @@ import com.softkare.itreader.R
 import com.softkare.itreader.adapter.bookAdapter
 import com.softkare.itreader.adapter.catalogAdapter
 import com.softkare.itreader.backend.Libro
+import com.softkare.itreader.backend.ListaLibros
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +21,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class AdminActivity : AppCompatActivity() {
     lateinit var list : List<Libro>
+    lateinit var list2 : ListaLibros
     lateinit var sublist : MutableList<Libro>
+    var page = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
@@ -61,15 +64,16 @@ class AdminActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        service.libroList().enqueue(object : Callback<List<Libro>> {
-            override fun onResponse(call: Call<List<Libro>>, response: Response<List<Libro>>) {
+        service.libroList(page).enqueue(object : Callback<ListaLibros> {
+            override fun onResponse(call: Call<ListaLibros>, response: Response<ListaLibros>) {
                 if(response.body() != null) {
-                    list = response.body()!!
+                    list2 = response.body()!!
+                    list = list2.results
                     recyclerView.adapter = catalogAdapter(list, this@AdminActivity)
                 }
             }
 
-            override fun onFailure(call: Call<List<Libro>>, t: Throwable) {
+            override fun onFailure(call: Call<ListaLibros>, t: Throwable) {
                 println("ERROR AL RECIBIR EL CATÁLOGO DE LIBROS")
             }
         })
