@@ -21,10 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchFragment : Fragment() {
     lateinit var list : List<Libro>
-    lateinit var list2 : ListaLibros
     lateinit var sublist : MutableList<Libro>
-    lateinit var sublist2 : MutableList<Libro>
-    var page = 1
     var searchType = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,34 +29,13 @@ class SearchFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         val searchView : SearchView = view.findViewById(R.id.searchview)
-        val btn : Button = view.findViewById(R.id.cargar)
-        val btnReset : Button = view.findViewById(R.id.buttonReset)
         val btnFilter : ImageView = view.findViewById(R.id.btnFilter)
         val recyclerView : RecyclerView = view.findViewById(R.id.recyclerSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
         list = listOf()
         sublist = mutableListOf()
-        sublist2 = mutableListOf()
-        page = 1
         searchType = 0
-        getList(recyclerView,btn,view)
-
-        btn.setOnClickListener {
-            page++
-            getList(recyclerView, btn, view)
-            searchView.setQuery("",false)
-            searchView.clearFocus()
-        }
-
-        btnReset.setOnClickListener {
-            searchView.setQuery("",false)
-            searchView.clearFocus()
-            btn.visibility = View.VISIBLE
-            sublist = mutableListOf()
-            sublist2 = mutableListOf()
-            page = 1
-            getList(recyclerView, btn, view)
-        }
+        getList(recyclerView)
 
         btnFilter.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), btnFilter)
@@ -100,7 +76,6 @@ class SearchFragment : Fragment() {
                     }
                 }
                 recyclerView.adapter = bookAdapter(sublist)
-                btn.visibility = View.GONE
                 return false
             }
 
@@ -110,26 +85,21 @@ class SearchFragment : Fragment() {
         return view
     }
 
-    private fun getList(recyclerView: RecyclerView, btn: Button, view: View) {
+    private fun getList(recyclerView: RecyclerView) {
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        service.libroList(page).enqueue(object : Callback<ListaLibros> {
-            override fun onResponse(call: Call<ListaLibros>, response: Response<ListaLibros>) {
+        service.libros().enqueue(object : Callback<List<Libro>> {
+            override fun onResponse(call: Call<List<Libro>>, response: Response<List<Libro>>) {
                 if(response.body() != null){
-                    list2 = response.body()!!
-                    sublist2.addAll(list2.results)
-                    list = sublist2
+                    list = response.body()!!
                     recyclerView.adapter = bookAdapter(list)
-                }else{
-                    Toast.makeText(requireContext(), "No hay más libros que mostrar", Toast.LENGTH_SHORT).show()
-                    btn.visibility = View.GONE;
                 }
             }
 
-            override fun onFailure(call: Call<ListaLibros>, t: Throwable) {
+            override fun onFailure(call: Call<List<Libro>>, t: Throwable) {
                 println("ERROR AL RECIBIR EL CATALOGO")
             }
         })

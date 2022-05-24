@@ -27,12 +27,14 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_bookmark_add_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_bookmarks_24.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_palette_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_radio_button_checked_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_text_fields_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/ic_baseline_title_24.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_round_close_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/searchview_background.xml" value="0.221" />
         <entry key="app/src/main/res/font/amita.xml" value="0.2261650277896537" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.2013681060282172" />
@@ -47,6 +49,7 @@
         <entry key="app/src/main/res/layout/dialograte.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_book_page.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_book_page_in_library.xml" value="0.2013681060282172" />
+        <entry key="app/src/main/res/layout/fragment_bookmarklist.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_catalog.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/fragment_document_page.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/fragment_library.xml" value="0.17271078875793291" />
@@ -59,7 +62,7 @@
         <entry key="app/src/main/res/layout/item_doc.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/layout/login_activity.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/layout/register_activity.xml" value="0.27395833333333336" />
-        <entry key="app/src/main/res/layout/visualizer_fragment.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/layout/visualizer_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/menu/admin_menu.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.2013681060282172" />
         <entry key="app/src/main/res/menu/menu_bookmarks.xml" value="0.2013681060282172" />

@@ -20,6 +20,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/signout"
+            android:layout_width="47dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="76dp"
+            android:src="@drawable/ic_baseline_exit_to_app_24"
+            app:layout_constraintBottom_toTopOf="@+id/searchviewAdmin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
         <ImageButton
             android:id="@+id/btnUploadAdmin"
             android:layout_width="115dp"
@@ -48,19 +61,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/buttonReset"
-            android:layout_width="88dp"
-            android:layout_height="39dp"
-            android:backgroundTint="@color/GREENBACK"
-            android:text="@string/reset"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/searchviewAdmin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="1.0" />
 
         <SearchView
             android:id="@+id/searchviewAdmin"
@@ -96,15 +96,6 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_book_admin" />
-
-            <Button
-                android:id="@+id/cargar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/charge"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:backgroundTint="@color/GREENBACK"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

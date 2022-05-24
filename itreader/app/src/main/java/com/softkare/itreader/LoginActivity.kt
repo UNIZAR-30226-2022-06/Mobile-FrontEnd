@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.softkare.itreader.admin.AdminActivity
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import com.softkare.itreader.backend.Usuario
 import com.softkare.itreader.sharedPreferences.Companion.prefs
@@ -80,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
                         prefs.saveName(u!!.nombre)
                         prefs.saveUsername(u!!.nomUsuario)
                         prefs.savePass(u!!.password)
-                        showGeneral()
+                        if (u!!.esAdmin) showAdmin() else showGeneral()
                         finish()
                     }else{
                         showAlert()
@@ -121,6 +122,9 @@ class LoginActivity : AppCompatActivity() {
         startActivity(pantallaGeneral)
     }
 
-
+    private fun showAdmin() {
+        val pantallaAdmin = Intent(this, AdminActivity::class.java)
+        startActivity(pantallaAdmin)
+    }
 }
 

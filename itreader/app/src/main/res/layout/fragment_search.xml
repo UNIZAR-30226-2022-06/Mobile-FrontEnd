@@ -47,19 +47,6 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/buttonReset"
-            android:layout_width="88dp"
-            android:layout_height="39dp"
-            android:backgroundTint="@color/GREENBACK"
-            android:text="@string/reset"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/searchview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="1.0" />
-
         <SearchView
             android:id="@+id/searchview"
             android:layout_width="378dp"
@@ -95,15 +82,6 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_book" />
-
-            <Button
-                android:id="@+id/cargar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/charge"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:backgroundTint="@color/GREENBACK"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
