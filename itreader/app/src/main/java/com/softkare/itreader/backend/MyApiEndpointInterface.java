@@ -52,10 +52,10 @@ public interface MyApiEndpointInterface {
     Call<Usuario> addDocsUser(@Path("nomUsuario") String nomUsuarioDestino, @Body RequestBody body);
 
     @PUT("deleteDocUsuario/{nomUsuario}/")
-    Call<ResponseBody> deleteDocUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Query("nomLibro") String nomLibro);
+    Call<ResponseBody> deleteDocUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Body RequestBody body);
 
     @PUT("deleteLibroUsuario/{nomUsuario}/")
-    Call<ResponseBody> deleteLibroUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Query("nomLibro") String nomLibro);
+    Call<ResponseBody> deleteLibroUsuario(@Path("nomUsuario") String nomUsuarioDestino, @Body RequestBody body);
 
     @DELETE("deleteUsuario/{nomUsuario}/")
     Call<ResponseBody> deleteUser(@Path("nomUsuario") String nomUsuario);

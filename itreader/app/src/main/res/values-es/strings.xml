@@ -82,4 +82,7 @@
     <string name="list_all_bm">Listar todos los marcadores</string>
     <string name="bookmark_list_label">Tus marcadores</string>
     <string name="deleted_doc">Documento borrado</string>
+    <string name="search_by_title">Buscar por título</string>
+    <string name="search_by_author">Buscar por autor</string>
+    <string name="search_by_editorial">Buscar por editorial</string>
 </resources>

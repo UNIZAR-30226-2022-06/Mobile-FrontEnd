@@ -81,4 +81,7 @@
     <string name="list_all_bm">List all bookmarks</string>
     <string name="bookmark_list_label">Your bookmarks</string>
     <string name="deleted_doc">Document deleted</string>
+    <string name="search_by_title">Search by title</string>
+    <string name="search_by_author">Search by author</string>
+    <string name="search_by_editorial">Search by editorial</string>
 </resources>

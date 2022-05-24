@@ -29,6 +29,8 @@ class BookVisualizer : Fragment() {
     private val textMediumSize = 16F
     private val textLargeSize = 24F
     private val textVeryLargeSize = 36F
+    lateinit var content : TextView
+    lateinit var mSpannableString: SpannableString
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +41,7 @@ class BookVisualizer : Fragment() {
         val view = inflater.inflate(R.layout.visualizer_fragment, container, false)
         val arrowBack : ImageView = view.findViewById(R.id.arrow_back)
         val arrowForward : ImageView = view.findViewById(R.id.arrow_forward)
-        val content : TextView = view.findViewById(R.id.content)
+        content = view.findViewById(R.id.content)
         val buttonSize : ImageView = view.findViewById(R.id.buttonSize)
         val buttonColor : ImageView = view.findViewById(R.id.buttonColor)
         val buttonSearch : ImageView = view.findViewById(R.id.buttonSearch)
@@ -49,7 +51,8 @@ class BookVisualizer : Fragment() {
         val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
         content.textSize = textMediumSize
         content.movementMethod = ScrollingMovementMethod.getInstance()
-        content.text = "Aquí irá el contenido de la página recibida"
+        content.text = "Aquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibida"
+        mSpannableString = SpannableString(content.text)
 
         arrowBack.setOnClickListener {
             //TODO: Pasar a página anterior o, si es la primera, volver a BookPageInLibraryFragment
@@ -121,24 +124,24 @@ class BookVisualizer : Fragment() {
             val buttonConfirmSearch: Button = vista.findViewById(R.id.buttonConfirmSearch)
             buttonConfirmSearch.setOnClickListener {
                 dialog?.hide()
-                resetSearchVisualizer(content)
-                val spannableString = SpannableString(content.text)
+                resetSearchVisualizer()
+                mSpannableString = SpannableString(content.text)
                 var index = content.text.indexOf(searchText.text.toString(), 0, true)
                 if (index >= 0) {
                     var nFound = 1
-                    spannableString.setSpan(
+                    mSpannableString.setSpan(
                         BackgroundColorSpan(resources.getColor(R.color.green)), index,
                         index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                     while (index >= 0) {
                         index = content.text.indexOf(searchText.text.toString(), index+1, true)
                         if (index >= 0) {
-                            spannableString.setSpan(
+                            mSpannableString.setSpan(
                                 BackgroundColorSpan(resources.getColor(R.color.green)), index,
                                 index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                             nFound++
                         }
                     }
-                    content.text = spannableString
+                    content.text = mSpannableString
                     val textResults : String = nFound.toString() + " " + getString(R.string.results)
                     Toast.makeText(requireContext(), textResults, Toast.LENGTH_SHORT).show()
                 } else {
@@ -189,16 +192,17 @@ class BookVisualizer : Fragment() {
         return view
     }
 
-    private fun resetSearchVisualizer(content : TextView) {
+    private fun resetSearchVisualizer() {
         val spannableString = SpannableString(content.text)
         when (style) {
             1 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.white)),
-                0, 1000, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             2 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.black)),
-                0, 1000, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             3 -> spannableString.setSpan(BackgroundColorSpan(resources.getColor(R.color.light_orange)),
-                0, 1000, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                0, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
+        content.text = spannableString
     }
 
     private fun getBookmarkList(recyclerView: RecyclerView) {

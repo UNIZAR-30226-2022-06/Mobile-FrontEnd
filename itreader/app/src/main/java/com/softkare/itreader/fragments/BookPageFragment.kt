@@ -49,7 +49,7 @@ class BookPageFragment : Fragment() {
                     val t = Toast.makeText(activity, getString(R.string.book_added), Toast.LENGTH_SHORT)
                     t.show()
                     val activity = view.context as AppCompatActivity
-                    val transit = LibraryFragment()
+                    val transit = CatalogFragment()
                     transit.arguments = bundle
                     activity.supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, transit)

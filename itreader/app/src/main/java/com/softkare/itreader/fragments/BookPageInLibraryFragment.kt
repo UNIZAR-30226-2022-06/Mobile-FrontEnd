@@ -34,6 +34,7 @@ class BookPageInLibraryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_book_page_in_library, container, false)
         val buttonDelete = view.findViewById<Button>(R.id.buttonDeleteLibrary)
         val buttonRead = view.findViewById<Button>(R.id.buttonRead)
+        val buttonShare = view.findViewById<ImageView>(R.id.btnShare)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -41,9 +42,15 @@ class BookPageInLibraryFragment : Fragment() {
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
 
+        buttonShare.setOnClickListener {
+            //TODO: Añadir servicio para compartir libro
+        }
+
         buttonDelete.setOnClickListener {
-            service.deleteLibroUsuario(sharedPreferences.prefs.getUsername(), book.nombre).enqueue(object :
-                Callback<ResponseBody> {
+            val J = JSONObject()
+            J.put("nomLibro", book.nombre)
+            val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
+            service.deleteLibroUsuario(sharedPreferences.prefs.getUsername(), body).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                     Toast.makeText(activity, getString(R.string.book_deleted), Toast.LENGTH_SHORT).show()
                     val activity = view.context as AppCompatActivity
