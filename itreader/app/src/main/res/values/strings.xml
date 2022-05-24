@@ -62,7 +62,8 @@
     <string name="textcolor_blackonwhite">Black on white</string>
     <string name="textcolor_whiteonblack">White on black</string>
     <string name="textcolor_warm">Warm colors</string>
-    <string name="textsearch_label">Search in book</string>
+    <string name="textsearch_label_word">Search word in page</string>
+    <string name="textsearch_label_page">Search page in book</string>
     <string name="textstyle_alignStart">Align to start</string>
     <string name="textstyle_alignCenter">Align to center</string>
     <string name="password_error">Password Error</string>
@@ -85,4 +86,6 @@
     <string name="search_by_author">Search by author</string>
     <string name="search_by_editorial">Search by editorial</string>
     <string name="charge">Charge more</string>
+    <string name="search_word">Search word</string>
+    <string name="search_page">Search page</string>
 </resources>

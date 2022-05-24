@@ -105,7 +105,6 @@ class AdminActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(intent,102)
         }
-
     }
 
     private fun getCatalog(recyclerView: RecyclerView, btn : Button) {
@@ -123,7 +122,7 @@ class AdminActivity : AppCompatActivity() {
                     recyclerView.adapter = catalogAdapter(list, this@AdminActivity)
                 } else {
                     Toast.makeText(this@AdminActivity, "No hay más libros que mostrar", Toast.LENGTH_SHORT).show()
-                    btn.visibility = View.GONE;
+                    btn.visibility = View.GONE
                 }
             }
 

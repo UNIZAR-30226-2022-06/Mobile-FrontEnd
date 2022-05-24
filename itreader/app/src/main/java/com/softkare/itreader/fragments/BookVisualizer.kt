@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +20,19 @@ import com.softkare.itreader.R
 import com.softkare.itreader.adapter.bookmarkAdapter
 import com.softkare.itreader.backend.Libro
 import com.softkare.itreader.backend.MyApiEndpointInterface
+import com.softkare.itreader.backend.PaginaLibro
+import com.softkare.itreader.sharedPreferences.Companion.prefs
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class BookVisualizer : Fragment() {
-    private val contenidoEjemplo = "Aquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibidaAquí irá el contenido de la página recibida"
     private var style = 1
     private var pageNumber = 1
     private val textSmallSize = 12F
@@ -31,17 +40,17 @@ class BookVisualizer : Fragment() {
     private val textLargeSize = 24F
     private val textVeryLargeSize = 36F
     lateinit var content : TextView
+    lateinit var page : PaginaLibro
+    lateinit var book : Libro
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val bundle : Bundle? = this.arguments
-        val book : Libro = bundle?.getSerializable("book") as Libro
         val view = inflater.inflate(R.layout.visualizer_fragment, container, false)
         val arrowBack : ImageView = view.findViewById(R.id.arrow_back)
         val arrowForward : ImageView = view.findViewById(R.id.arrow_forward)
-        content = view.findViewById(R.id.content)
         val buttonSize : ImageView = view.findViewById(R.id.buttonSize)
         val buttonColor : ImageView = view.findViewById(R.id.buttonColor)
         val buttonSearch : ImageView = view.findViewById(R.id.buttonSearch)
@@ -49,28 +58,41 @@ class BookVisualizer : Fragment() {
         val buttonFont : ImageView = view.findViewById(R.id.buttonFont)
 
         val builder = activity?.let { it1 -> AlertDialog.Builder(it1) }
+        content = view.findViewById(R.id.content)
+        book = bundle?.getSerializable("book") as Libro
         content.textSize = textMediumSize
         content.movementMethod = ScrollingMovementMethod.getInstance()
-        content.text = contenidoEjemplo
+
+        // CONSULTAR EL MARCAPÁGINAS, SI EXISTE
+        // pageNumber = marcapaginas
+        chargePage()
 
         arrowBack.setOnClickListener {
-            //TODO: Pasar a página anterior o, si es la primera, volver a BookPageInLibraryFragment
-            //pageNumber--
-            val bundle = Bundle()
-            bundle.putSerializable("book", book)
-            val activity = view.context as AppCompatActivity
-            val transit = BookPageInLibraryFragment()
-            transit.arguments = bundle
-            activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, transit)
-                .addToBackStack(null)
-                .commit()
+            if (pageNumber == 1) {
+                // Poner marcapáginas para este libro de este usuario
+                val J = JSONObject()
+                J.put("nombre", book.nombre)
+                J.put("nomLibro", book.nombre)
+                J.put("nomLibro", book.nombre)
+                val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
+                val bundle = Bundle()
+                bundle.putSerializable("book", book)
+                val activity = view.context as AppCompatActivity
+                val transit = BookPageInLibraryFragment()
+                transit.arguments = bundle
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, transit)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                pageNumber--
+                chargePage()
+            }
         }
 
         arrowForward.setOnClickListener {
-            //TODO: Pasar a página siguiente si existe
-            Toast.makeText(activity, getString(R.string.no_next_page), Toast.LENGTH_SHORT).show()
-            //pageNumber++
+            pageNumber++
+            chargePage()
         }
 
         buttonSize.setOnClickListener {
@@ -115,38 +137,63 @@ class BookVisualizer : Fragment() {
         }
 
         buttonSearch.setOnClickListener {
+            val popupMenu = PopupMenu(requireContext(), buttonSearch)
+            popupMenu.menuInflater.inflate(R.menu.menu_visualizer_search, popupMenu.menu)
             val vista = layoutInflater.inflate(R.layout.dialog_textsearch, null)
             builder?.setView(vista)
             val dialog = builder?.create()
-            dialog?.show()
             val searchText: EditText = vista.findViewById(R.id.searchEditText)
             val buttonConfirmSearch: Button = vista.findViewById(R.id.buttonConfirmSearch)
-            buttonConfirmSearch.setOnClickListener {
-                dialog?.hide()
-                content.text = contenidoEjemplo
-                val mSpannableString = SpannableString(content.text)
-                var index = content.text.indexOf(searchText.text.toString(), 0, true)
-                if (index >= 0) {
-                    var nFound = 1
-                    mSpannableString.setSpan(
-                        BackgroundColorSpan(resources.getColor(R.color.green)), index,
-                        index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    while (index >= 0) {
-                        index = content.text.indexOf(searchText.text.toString(), index+1, true)
-                        if (index >= 0) {
-                            mSpannableString.setSpan(
-                                BackgroundColorSpan(resources.getColor(R.color.green)), index,
-                                index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                            nFound++
+            val label : TextView = vista.findViewById(R.id.search_visualizer_label)
+            popupMenu.setOnMenuItemClickListener {item ->
+                when (item.itemId) {
+                    R.id.search_words -> {
+                        label.text = getString(R.string.textsearch_label_word)
+                        dialog?.show()
+                        buttonConfirmSearch.setOnClickListener {
+                            dialog?.hide()
+                            content.text = page.contenido
+                            val mSpannableString = SpannableString(content.text)
+                            var index = content.text.indexOf(searchText.text.toString(), 0, true)
+                            if (index >= 0) {
+                                var nFound = 1
+                                mSpannableString.setSpan(
+                                    BackgroundColorSpan(resources.getColor(R.color.green)), index,
+                                    index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                while (index >= 0) {
+                                    index = content.text.indexOf(searchText.text.toString(), index+1, true)
+                                    if (index >= 0) {
+                                        mSpannableString.setSpan(
+                                            BackgroundColorSpan(resources.getColor(R.color.green)), index,
+                                            index + searchText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                        nFound++
+                                    }
+                                }
+                                content.text = mSpannableString
+                                val textResults : String = nFound.toString() + " " + getString(R.string.results)
+                                Toast.makeText(requireContext(), textResults, Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(requireContext(), getString(R.string.no_results), Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
-                    content.text = mSpannableString
-                    val textResults : String = nFound.toString() + " " + getString(R.string.results)
-                    Toast.makeText(requireContext(), textResults, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), getString(R.string.no_results), Toast.LENGTH_SHORT).show()
+                    R.id.search_page -> {
+                        label.text = getString(R.string.textsearch_label_page)
+                        dialog?.show()
+                        buttonConfirmSearch.setOnClickListener {
+                            dialog?.hide()
+                            if (searchText.text.isDigitsOnly()) {
+                                println(searchText.text.isDigitsOnly())
+                                println(searchText.text.toString())
+                                pageNumber = Integer.parseInt(searchText.text.toString())
+                                chargePage()
+                            }
+                        }
+                    }
                 }
+                true
             }
+            popupMenu.show()
         }
 
         buttonBookmark.setOnClickListener {
@@ -155,7 +202,8 @@ class BookVisualizer : Fragment() {
             popupMenu.setOnMenuItemClickListener {item ->
                 when (item.itemId) {
                     R.id.create_bookmark -> {
-                        Toast.makeText(requireContext(), "Falta servicio de añadir", Toast.LENGTH_SHORT).show()
+                        // Interactividad para crear nombre
+                        createBookmark()
                     }
                     R.id.list_bookmarks  -> {
                         val vista = layoutInflater.inflate(R.layout.dialog_bookmarklist, null)
@@ -191,6 +239,29 @@ class BookVisualizer : Fragment() {
         return view
     }
 
+    private fun chargePage() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(MyApiEndpointInterface.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(MyApiEndpointInterface::class.java)
+        service.leerLibro(book.nombre, pageNumber).enqueue(object : Callback<PaginaLibro> {
+            override fun onResponse(call: Call<PaginaLibro>, response: Response<PaginaLibro>) {
+                if (response.body() != null) {
+                    page = response.body()!!
+                    pageNumber = page.pagina
+                    content.text = page.contenido
+                } else {
+                    println("PAGINA VACIA")
+                }
+            }
+
+            override fun onFailure(call: Call<PaginaLibro>, t: Throwable) {
+                println("ERROR AL RECIBIR LA PÁGINA DEL LIBRO")
+            }
+        })
+    }
+
     private fun getBookmarkList(recyclerView: RecyclerView) {
         val retrofit = Retrofit.Builder()
             .baseUrl(MyApiEndpointInterface.BASE_URL)
@@ -200,5 +271,29 @@ class BookVisualizer : Fragment() {
         //TODO: Llamar a servicio que devuelve la lista de marcadores
         val list : List<String> = listOf("Inicio","Sorpresa","Tragedia","Mequetrefe","Distorsión","Zopenco","Legislatura","Tragedia","Mequetrefe","Distorsión")
         recyclerView.adapter = bookmarkAdapter(list, requireContext())
+    }
+
+    private fun createBookmark() {
+        val J = JSONObject()
+        J.put("usuario", prefs.getUsername())
+        J.put("libro", book.nombre)
+        J.put("nombre", "Nueva marca")
+        J.put("pagina", pageNumber)
+        val body : RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), J.toString())
+        val retrofit = Retrofit.Builder()
+            .baseUrl(MyApiEndpointInterface.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(MyApiEndpointInterface::class.java)
+        service.createMarca(body).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                println("MARCA CREADA")
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                println("ERROR AL CREAR LA MARCA")
+            }
+        })
+
     }
 }

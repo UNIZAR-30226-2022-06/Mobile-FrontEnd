@@ -101,5 +101,8 @@ public interface MyApiEndpointInterface {
     Call<ResponseBody> subirLibro(@Part("usuario") RequestBody usuario, @Part MultipartBody.Part cover);
 
     @GET("leerLibro/{nombre}/{pagina}")
-    Call<PaginaLibro> leerLibro(@Path("nombre") String nombre , @Path("pagina") Integer pagina);
+    Call<PaginaLibro> leerLibro(@Path("nombre") String nombre, @Path("pagina") Integer pagina);
+
+    @POST("createMarca/")
+    Call<ResponseBody> createMarca(@Body RequestBody body);
 }
