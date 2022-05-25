@@ -15,11 +15,13 @@ class bookViewHolder(view:View):RecyclerView.ViewHolder(view) {
 
     val nameBook = view.findViewById<TextView>(R.id.titulo)
     val autor = view.findViewById<TextView>(R.id.autor)
+    val editorial = view.findViewById<TextView>(R.id.editorial)
     val photo = view.findViewById<ImageView>(R.id.imageViewBook)
 
     fun render(BookModel: Libro){
         nameBook.text = BookModel.nombre
         autor.text = BookModel.autor
+        editorial.text = BookModel.editorial
         Glide.with(photo.context).load(BookModel.linkPortada).into(photo)
     }
 }

@@ -96,7 +96,7 @@ public interface MyApiEndpointInterface {
     @PUT("valorarLibro/{nombre}/")
     Call<Libro> valorarLibro(@Path("nombre") String nomLibro, @Body RequestBody body);
 
-    @DELETE("deleteLibro/{nomLibro}")
+    @DELETE("deleteLibro/{nomLibro}/")
     Call<ResponseBody> deleteLibro(@Path("nomLibro") String nomLibro);
 
     @Multipart
@@ -107,7 +107,7 @@ public interface MyApiEndpointInterface {
     Call<PaginaLibro> leerLibro(@Path("nombre") String nombre, @Path("pagina") Integer pagina);
 
     @POST("createMarca/")
-    Call<ResponseBody> createMarca(@Body RequestBody body);
+    Call<Respuesta> createMarca(@Body RequestBody body);
 
     @GET("MarcasUsuarioLibro/{nomUsuario}/{nomLibro}/")
     Call<List<Marca>> marcasUsuarioLibro(@Path("nomUsuario") String nomUsuario, @Path("nomLibro") String nomLibro);

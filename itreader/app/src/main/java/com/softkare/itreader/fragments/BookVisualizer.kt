@@ -18,10 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softkare.itreader.R
 import com.softkare.itreader.adapter.bookmarkAdapter
-import com.softkare.itreader.backend.Libro
-import com.softkare.itreader.backend.Marca
-import com.softkare.itreader.backend.MyApiEndpointInterface
-import com.softkare.itreader.backend.PaginaLibro
+import com.softkare.itreader.backend.*
 import com.softkare.itreader.sharedPreferences.Companion.prefs
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -349,14 +346,20 @@ class BookVisualizer : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(MyApiEndpointInterface::class.java)
-        service.createMarca(body).enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+        service.createMarca(body).enqueue(object : Callback<Respuesta> {
+            override fun onResponse(call: Call<Respuesta>, response: Response<Respuesta>) {
                 if(response.body() != null) {
-                    Toast.makeText(requireContext(), getString(R.string.bookmark_created), Toast.LENGTH_SHORT).show()
+                    if(response.body()!!.success == true){
+                        Toast.makeText(requireContext(), getString(R.string.bookmark_created), Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(requireContext(), getString(R.string.bookmark_no_created), Toast.LENGTH_LONG).show()
+                    }
+                }else{
+                    println("AAAAAAAA")
                 }
             }
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            override fun onFailure(call: Call<Respuesta>, t: Throwable) {
                 println("ERROR AL CREAR LA MARCA")
             }
         })

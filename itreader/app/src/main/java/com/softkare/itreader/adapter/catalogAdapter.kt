@@ -37,6 +37,7 @@ class catalogAdapter(private val bookCatalog: List<Libro>, val mCtx : Context) :
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 val service = retrofit.create(MyApiEndpointInterface::class.java)
+                println(item.nombre)
                 service.deleteLibro(item.nombre).enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         val activity = v.context as AppCompatActivity

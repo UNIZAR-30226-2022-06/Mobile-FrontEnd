@@ -13,11 +13,13 @@ class catalogViewHolder(view:View) : RecyclerView.ViewHolder(view) {
     val title = view.findViewById<TextView>(R.id.titulo)
     val autor = view.findViewById<TextView>(R.id.autor)
     val photo = view.findViewById<ImageView>(R.id.imageViewBook)
+    val editorial = view.findViewById<TextView>(R.id.editorial)
     val delete = view.findViewById<ImageView>(R.id.deleteButton)
 
     fun render(book: Libro){
         title.text = book.nombre
         autor.text = book.autor
+        editorial.text = book.editorial
         Glide.with(photo.context).load(book.linkPortada).into(photo)
     }
 }

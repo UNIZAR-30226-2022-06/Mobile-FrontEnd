@@ -90,6 +90,7 @@
     <string name="search_page">Search page</string>
     <string name="bookmark_create">Name your bookmark</string>
     <string name="bookmark_created">Bookmark created</string>
+    <string name="bookmark_no_created">Bookmark not created: Bookmark limit reached</string>
     <string name="error_bookmark_name">There is already a bookmark with this name</string>
     <string name="error_bookmark_page">There is already a bookmark in this page</string>
     <string name="page">Page</string>

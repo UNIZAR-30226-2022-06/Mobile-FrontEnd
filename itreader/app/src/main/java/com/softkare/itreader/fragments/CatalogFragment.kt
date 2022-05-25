@@ -70,6 +70,7 @@ class CatalogFragment : Fragment() {
                     recyclerView.adapter = bookAdapter(list)
                     pb.setVisibility(View.VISIBLE);
                 } else {
+                    Toast.makeText(requireContext(),"No hay más libros para cargar", Toast.LENGTH_SHORT).show()
                     pb.setVisibility(View.GONE);
                 }
             }
