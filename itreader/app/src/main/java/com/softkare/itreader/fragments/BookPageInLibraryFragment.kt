@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.softkare.itreader.R
 import com.softkare.itreader.backend.Libro
+import com.softkare.itreader.fragments.BookVisualizer
 import com.softkare.itreader.backend.MyApiEndpointInterface
 import com.softkare.itreader.backend.Usuario
 import com.softkare.itreader.sharedPreferences
